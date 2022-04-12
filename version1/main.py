@@ -1,0 +1,33 @@
+#! /usr/local/bin/python3.10
+import time
+
+from src.controllers.google_controller import GoogleDorkController
+from src.controllers.scraping_controller import ScrapingController
+
+from src.models.google_model import ModelGoogleDork
+from src.models.srcaping_model import ScrapingModel
+
+from src.views.view import ViewMain, ViewPick
+
+start = time.perf_counter()
+
+extension_suffixe = {
+                    '(bdd|base de donée|database) ': 'https://www.file-extension.info/fr/fichiers-de-base-de-donnes/',
+                    '(system|windows|linux|javaOs|os)': 'https://www.file-extension.info/fr/fichiers-systme',
+                    '(compresse|compress|compresser|zip)': 'https://www.file-extension.info/fr/fichiers-compresss',
+                    '(texte|txt|text|script|file)': 'https://www.file-extension.info/text-files'
+                    }
+
+scrap = ScrapingController(ScrapingModel())
+google_dork_obj = GoogleDorkController(ModelGoogleDork())
+
+if not scrap.already_registered(ScrapingModel.NAME_FILE_EXTENSION):  
+    print('Enregistrement des extensions')
+    scrap.save_suffix_extension(extension_suffixe)
+    
+if not google_dork_obj.already_registered(ModelGoogleDork.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK): # FIXME mettre cette methode chez google_controller 
+    print('Enregistrement des liens')
+    google_dork_obj.file_type()
+
+    
+print(time.perf_counter() - start) 

@@ -1,4 +1,3 @@
-Il faut reussir a pivoter d'identifiant api 
-1: recuperez les identifiant qui ne sont pas utiliser
-2: switcher les id qui ne sont pas utiliser sur les attributs est les mettre a True
-3: mettre les clefs qu'il sont ete utiliser a False 
+Enregistrement des liens trouver (essayer d'etre plus precis dans la recherche)
+Ajouter les id de ayett 
+Finir la vue 

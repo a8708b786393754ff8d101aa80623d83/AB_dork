@@ -1,12 +1,1 @@
-{
-  "api_keys": [
-    { "AIzaSyBQggYLTLGkNwN1A2IU-ho3Blb7bKI8S4Q": false },
-    { "AIzaSyDBWlnLaAzrqyMRp12_s8Mk3PIJIs1ZkGk": true },
-    { "AIzaSyC5sEUyK7zyC4sIxOdYLg9tFTxUxuQzk_g": false }
-  ],
-  "cse_id": [
-    { "4a135df94ee0e5dad": false },
-    { "3a3d04f12946b5dbf": true },
-    { "cfaac28e5afd61c07": false }
-  ]
-}
+{"api_keys": [{"AIzaSyBQggYLTLGkNwN1A2IU-ho3Blb7bKI8S4Q": false}, {"AIzaSyDBWlnLaAzrqyMRp12_s8Mk3PIJIs1ZkGk": false}, {"AIzaSyC5sEUyK7zyC4sIxOdYLg9tFTxUxuQzk_g": true}], "cse_id": [{"4a135df94ee0e5dad": false}, {"3a3d04f12946b5dbf": false}, {"cfaac28e5afd61c07": true}]}

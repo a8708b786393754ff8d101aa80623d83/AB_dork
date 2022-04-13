@@ -29,6 +29,7 @@ class ScrapingController(ControllerBase):
         """
         
         extension = []
+        self.view.start()
         # NOTE Non verife certificat  SSL
         resp = requests.get(url, headers=self.headers, verify=False)
         if resp.ok:
@@ -38,7 +39,7 @@ class ScrapingController(ControllerBase):
                     extension.append(column.a['title'].lower()[1:])
                 except TypeError:
                     pass
-
+        
         return extension
 
     def save_suffix_extension(self, data: dict):
@@ -55,3 +56,4 @@ class ScrapingController(ControllerBase):
 
         # NOTE ecrit les donner dans un fichier json
         self.model.write_json_dict(self.model.NAME_FILE_EXTENSION, new_data)
+        self.view.save_file(self.model.NAME_FILE_EXTENSION)

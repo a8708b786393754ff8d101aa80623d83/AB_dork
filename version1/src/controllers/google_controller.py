@@ -15,8 +15,6 @@ class GoogleDorkController(ControllerBase):
 
     def __init__(self, model_obj, view_obj):
         super().__init__(model_obj, view_obj)
-
-        self.pivot = 0
         self.page = 1
         # calculating start, (page=2) => (start=11), (page=3) => (start=21)
         self.start = (self.page - 1) * 10 + 1
@@ -112,6 +110,7 @@ class GoogleDorkController(ControllerBase):
                         content_original['cse_id'][index_cse_id_for_true][self.__search_engine_id] = True
 
                         self.model.set_creditials(content_original)
+                        self.view.save_file(self.model.NAME_FILE_SAVING_CREDENTIALS)
                         return None
 
     def file_type(self):
@@ -125,6 +124,7 @@ class GoogleDorkController(ControllerBase):
                 result = self.__requests_uri({'q': f'allintext: {keys} ','fileType': f'{ext}'}) # NOTE effectue les requetes
                 
                 if not result.json().get('error') is None:
+                    self.view.pivot()
                     self.__pivote_credentials()
 
                 items = result.json().get('items')
@@ -134,3 +134,4 @@ class GoogleDorkController(ControllerBase):
 
         # NOTE enregistre les données
         self.model.write_json_dict(self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK, data_result)
+        self.view.save_file(self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK)

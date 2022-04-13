@@ -1,8 +1,9 @@
 
 
 class ControllerBase: 
-    def __init__(self, model):
+    def __init__(self, model, view):
         self.model = model
+        self.view = view 
     
     def already_registered(self, filename: str): 
         """_summary_ FIXME

@@ -10,8 +10,8 @@ class ScrapingController(ControllerBase):
         Args:
             model_obj (object): objet model
     """
-    def __init__(self, model_obj):
-        super().__init__(model_obj)
+    def __init__(self, model_obj, view_obj):
+        super().__init__(model_obj, view_obj)
         
         self.headers = {
             "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv :98.0) Gecko/20100101 Firefox/98.0",

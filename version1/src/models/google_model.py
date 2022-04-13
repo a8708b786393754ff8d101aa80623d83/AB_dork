@@ -3,12 +3,11 @@ from pathlib import Path
 
 from .model_base import ModelBase
 
-
 class ModelGoogleDork(ModelBase):
     """Méthode constructrice, herite des attributs de l'objet ModelBase."""
     
     NAME_FILE_SAVING_ITEMS_GOOGLE_DORK = 'items_google_dork.json'
-    NAME_FILE_SAVING_CREDENTIALS = 'test_api.json'
+    NAME_FILE_SAVING_CREDENTIALS = 'api_information.json'
     def __init__(self):
         super().__init__()
         
@@ -54,21 +53,3 @@ class ModelGoogleDork(ModelBase):
         
         with open(self.PATH_DATA+self.NAME_FILE_SAVING_CREDENTIALS, 'w') as f: 
             json.dump(data, f) 
-
-    def get_identifiers_not_used(self): 
-        content = self.get_creditial()
-        not_used = []
-        
-        for creditials in content.values(): 
-            for data in creditials:
-                for key, value in data.items(): 
-                    if not value:
-                        not_used.append(key)
-                        
-        
-        return not_used
-                        
-        
-if __name__ == '__main__': 
-    g = ModelGoogleDork()
-    g.get_identifiers_not_used()

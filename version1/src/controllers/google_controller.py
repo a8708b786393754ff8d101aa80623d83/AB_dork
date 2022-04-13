@@ -13,8 +13,8 @@ class GoogleDorkController(ControllerBase):
             model_obj (object): object model
     """
 
-    def __init__(self, model_obj):
-        super().__init__(model_obj)
+    def __init__(self, model_obj, view_obj):
+        super().__init__(model_obj, view_obj)
 
         self.pivot = 0
         self.page = 1
@@ -24,6 +24,7 @@ class GoogleDorkController(ControllerBase):
         # ayoub AIzaSyBQggYLTLGkNwN1A2IU-ho3Blb7bKI8S4Q
         self.__api_key = 'AIzaSyDBWlnLaAzrqyMRp12_s8Mk3PIJIs1ZkGk'
         self.__search_engine_id = '3a3d04f12946b5dbf'  # ayoub 4a135df94ee0e5dad
+        self.creditial_use = []
         self.url_base = f'https://www.googleapis.com/customsearch/v1?key={self.__api_key}&cx={self.__search_engine_id}'
 
         self.__init_creditial()
@@ -55,9 +56,9 @@ class GoogleDorkController(ControllerBase):
                         content_original['api_keys'].append({key_api: True})
                         content_original['cse_id'].append({key_cse: True})
 
-                        break  # ANCHOR on deja ce qu'il faut pas besionde continuer
+                        self.model.set_creditials(content_original)
 
-        self.model.set_creditials(content_original)
+                        return None
 
     def __requests_uri(self, params: dict):
         """Effectue les requetes avec les parametres donner.
@@ -72,35 +73,46 @@ class GoogleDorkController(ControllerBase):
         return requests.get(self.url_base, params=params)
 
     def __pivote_credentials(self):
-        """Methode qui permet de pivoter d'identifiant pour l'api de google."""  # FIXME finir le
-        # self.pivot += 1
-        # if self.pivot >= 2:
-        #     #TODO mettre une methode qui renitialise les true est false du fichier api
-        #     exit('Un beug innatendu a été signaler')
-
+        """Methode qui permet de pivoter d'identifiant pour l'api de google."""
+        
         api = self.model.get_api_creditial()
         cse = self.model.get_cse_creditail()
-
         content_original = self.model.get_creditial()
 
         for data_api, data_cse in zip(api, cse):
-            for (key_api, value_api), (key_cse, value_cse) in zip(data_api.items(), data_cse.items()):
-                if not value_api and not value_cse:  # NOTE si il sont a True
-                    # NOTE recupere les index des clef qui sont utiliser
-                    i_api = content_original['api_keys'].index({key_api: True})
-                    i_cse = content_original['cse_id'].index({key_cse: True})
+            for key_api, key_cse in zip(data_api.keys(), data_cse.keys()):
+                # NOTE c'est pour verifier si la clef d'api n'a pas deja utiliser dans cette session
+                if not key_api in self.creditial_use:
+                    self.creditial_use.append(key_api)
+                    # condition sur les identifiant qui ne sont pas utilser
+                    if key_api != self.__api_key and key_cse != self.__search_engine_id:
+                        # NOTE recupere les index des clef qui sont utiliser
+                        index_api_key_for_false = content_original['api_keys'].index(
+                            {self.__api_key: True})
+                        index_cse_id_for_false = content_original['cse_id'].index(
+                            {self.__search_engine_id: True})
 
-                    print(i_api, i_cse); exit()
-                    # del content_original['api_keys'][i_api]
-                    # del content_original['cse_id'][i_cse]
+                        # NOTE recupere les index des clef qui ne sont pas utiliser
+                        index_api_key_for_true = content_original['api_keys'].index({
+                                                                                    key_api: False})
+                        index_cse_id_for_true = content_original['cse_id'].index({
+                                                                                 key_cse: False})
 
-                    # content_original['api_keys'].append({key_api: False})
-                    # content_original['cse_id'].append({key_cse: False})
-                    """
-                    FIXME apres print le contenue original je suis rendu compte que toute les valuer ete a false,
-                    il faut recuperez ceux qui sont a false au (TODO) tout debut est les repmlacer au attribut des identifiant
-                    """
-                    # print(content_original)
+                        # NOTE met les id utiliser a False
+                        content_original['api_keys'][index_api_key_for_false][self.__api_key] = False
+                        content_original['cse_id'][index_cse_id_for_false][self.__search_engine_id] = False
+
+                        # NOTE change les id est met a jour l'url
+                        self.__search_engine_id = key_cse
+                        self.__api_key = key_api
+                        self.url_base = f'https://www.googleapis.com/customsearch/v1?key={self.__api_key}&cx={self.__search_engine_id}'
+
+                        # NOTE met les id qui vont etre utiliser a True
+                        content_original['api_keys'][index_api_key_for_true][self.__api_key] = True
+                        content_original['cse_id'][index_cse_id_for_true][self.__search_engine_id] = True
+
+                        self.model.set_creditials(content_original)
+                        return None
 
     def file_type(self):
         """Methode qui effectue une requete a l'api google pour les type de fichier est enregistre les données dans un fichier JSON."""
@@ -110,21 +122,15 @@ class GoogleDorkController(ControllerBase):
 
         for keys, exts in data.items():  # NOTE boucle sur les donnes recuperer dans le fichier
             for ext in exts:  # NOTE boucle sur la liste d'extension
-
-                result = self.__requests_uri({  # NOTE effectue les requetes
-                    'q': f'allintext: {keys} ',
-                    'fileType': f'{ext}'
-                })
-
-                error = result.json().get('error')
-                if not error is None:
-                    self.__pivote_credentials()  # TODO finir cette methode
+                result = self.__requests_uri({'q': f'allintext: {keys} ','fileType': f'{ext}'}) # NOTE effectue les requetes
+                
+                if not result.json().get('error') is None:
+                    self.__pivote_credentials()
 
                 items = result.json().get('items')
                 if not items is None:  # NOTE si il y a un resultat ou qu'il y a pas d'erreur
                     for item in items:
-                        data_result[keys] = {item['title']: item['link']}
+                        data_result[keys].append({item['title']: item['link']})
 
         # NOTE enregistre les données
-        self.model.write_json_dict(
-            self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK, data_result)
+        self.model.write_json_dict(self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK, data_result)

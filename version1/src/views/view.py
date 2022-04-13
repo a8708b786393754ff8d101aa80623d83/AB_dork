@@ -1,11 +1,6 @@
 
 
-class ViewMain: 
-    def init(self): 
-        print("""
-              
-              
-              """)
+class ViewMain: pass 
 
 class ViewPick:
     def __init__(self):
@@ -18,3 +13,12 @@ class ViewPick:
             Mode 2: email       
         """)
         self.choice =  input('Veuillez choisir un mode: ') # FIXME verifier si c'est un nombre 
+        
+
+class ViewGoogleDork: 
+    def __init__(self):
+        pass
+    
+    def pivot(self): 
+        print('Les identifiant on pivoter')
+        

@@ -1,3 +1,19 @@
+#################
+CE QUE J'AI FAIT: 
+
+1: scrapper les extension (si il y en a) est les sauvegarder 
+2: faire des requetes api a google, pivote les identifiants, file type 
+3: 
+
+#################
+
+
+#############################
+CE QU'IL RESTE A FAIRE:
+1: verifier si l'enregistrement des liens marches 
+2: recuperer autre chose que les files types FIXME 
+#############################
+
+
 Enregistrement des liens trouver (essayer d'etre plus precis dans la recherche)
-Ajouter les id de ayett 
-Finir la vue 
+

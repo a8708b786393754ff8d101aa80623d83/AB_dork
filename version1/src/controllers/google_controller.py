@@ -2,7 +2,7 @@ import requests
 import urllib3
 
 from .controller_base import ControllerBase
-# NOTE desactive le message d'attention ( comme on a mis a false a la verification de certification)
+# NOTE desactive les warning ( comme on a mis a false a la verification de certification)
 urllib3.disable_warnings()
 
 
@@ -19,11 +19,11 @@ class GoogleDorkController(ControllerBase):
         # calculating start, (page=2) => (start=11), (page=3) => (start=21)
         # self.start = (self.page - 1) * 10 + 1
 
-        self.__api_key = 'AIzaSyDBWlnLaAzrqyMRp12_s8Mk3PIJIs1ZkGk'
-        self.__search_engine_id = '3a3d04f12946b5dbf'
+        self.__api_key = 'AIzaSyCTX03P8xYvjf_t9ErZ7r85D-Rkd0nnltg'
+        self.__search_engine_id = '328fb8378575e5642'
         self.creditial_use = []
         self.url_base = f'https://www.googleapis.com/customsearch/v1?key={self.__api_key}&cx={self.__search_engine_id}'
-        self.pivot = 0 
+        self.pivot = 0
         self.__init_creditial()
 
     def __init_creditial(self):
@@ -72,6 +72,10 @@ class GoogleDorkController(ControllerBase):
     def __pivote_credentials(self):
         """Methode qui permet de pivoter d'identifiant pour l'api de google."""
 
+        self.pivot += 1
+        if self.pivot > self.model.get_number_keys_api():
+            exit(0)
+
         api = self.model.get_api_creditial()
         cse = self.model.get_cse_creditail()
         content_original = self.model.get_creditial()
@@ -89,7 +93,6 @@ class GoogleDorkController(ControllerBase):
                         index_cse_id_for_false = content_original['cse_id'].index(
                             {self.__search_engine_id: True})
 
-                        print(content_original)
                         # NOTE recupere les index des clef qui ne sont pas utiliser
                         index_api_key_for_true = content_original['api_keys'].index({
                                                                                     key_api: False})
@@ -103,7 +106,12 @@ class GoogleDorkController(ControllerBase):
                         # NOTE change les id est met a jour l'url
                         self.__search_engine_id = key_cse
                         self.__api_key = key_api
-                        self.url_base = f'https://www.googleapis.com/customsearch/v1?key={self.__google traduction
+                        self.url_base = f'https://www.googleapis.com/customsearch/v1?key={self.__api_key}&cx={self.__search_engine_id}'
+
+                        # NOTE met les id qui vont etre utiliser a True
+                        content_original['api_keys'][index_api_key_for_true][self.__api_key] = True
+                        content_original['cse_id'][index_cse_id_for_true][self.__search_engine_id] = True
+
                         self.model.set_creditials(content_original)
                         self.view.update_file(
                             self.model.NAME_FILE_SAVING_CREDENTIALS)
@@ -115,26 +123,39 @@ class GoogleDorkController(ControllerBase):
         data = self.model.get_extension()  # NOTE recuper les extensions
         # NOTE les titres, les liens seront stockeés dedans
         data_result = {'': []}
-
         for keys, exts in data.items():  # NOTE boucle sur les donnes recuperer dans le fichier
             for ext in exts:  # NOTE boucle sur la liste d'extension
+                # result = self.__requests_uri({'q': f'allintext: {keys} ', 'fileType': ext })
                 # NOTE effectue les requetes
                 result = self.__requests_uri(
-                    {'q': f'allintext: {keys} ', 'fileType': f'{ext}'})
+                    {'fileType': ext, 'q': f' "{keys}" '})
 
-                if not result.json().get('error') is None:
-                    self.view.pivot()
-                    self.__pivote_credentials()
-
-                items = result.json().get('items')
-                if not items is None:  # NOTE si il y a un resultat ou qu'il y a pas d'erreur
-                    for item in items:
-                        data_result[keys] = []
-                        data_result[keys].append({item['title']: item['link']})
+                self.get_result(result, keys, data_result)  # ANCHOR tester ici
 
         # NOTE enregistre les données
-        self.model.write_json_dict(self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK, data_result)
+        self.model.write_json_dict(
+            self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK, data_result)
         self.view.save_file(self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK)
+
+    def get_result(self, resp: requests.Response, keys, data: dict):
+        """Methode qui est utiliser juste apres la requete api, 
+
+        Args:
+            resp (requests.Response): reponse de la requete api 
+            keys (str|int): clef du dictionnaire de donnée
+            data (dict): la ou seront enregistrez les donnée 
+        """
+
+        if not resp.json().get('error') is None:
+            self.view.pivot()
+            self.__pivote_credentials()
+
+        items = resp.json().get('items')
+        if not items is None:  # NOTE si il y a un resultat ou qu'il y a pas d'erreur
+            for item in items:
+                data[keys] = []
+                data[keys].append({item['title']: item['link']})
+        print(data)
 
     def __del__(self):
         """Met a jour les identifiants d'api pour qu'elle peuvent etre reutiliser par la suite ."""

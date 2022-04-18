@@ -32,8 +32,7 @@ class ViewGoogleDork(ViewBase):
 
     def pivot(self):
         print(Fore.GREEN+'[+] Les identifiant on pivoter'+Fore.RESET)
-
-
+        
 class ViewScraping(ViewBase):
     def __init__(self):
         super().__init__()

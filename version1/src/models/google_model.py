@@ -65,7 +65,7 @@ class ModelGoogleDork(ModelBase):
         with open(self.PATH_DATA+self.NAME_FILE_SAVING_CREDENTIALS, 'w') as f: 
             json.dump(data, f) 
             
-    def get_number_keys(self): 
+    def get_number_keys_api(self): 
         """Donne le nombre d'identifiant stockée 
 
         Returns:

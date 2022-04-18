@@ -65,14 +65,14 @@ class GoogleDorkController(ControllerBase):
             params (dict): parametre pour ajouter a l'url
 
         Returns:
-            requests.Response: reponse de la requete  
+            requests.Response: reponse de la requete
         """
 
         return requests.get(self.url_base, params=params)
 
     def __pivote_credentials(self):
         """Methode qui permet de pivoter d'identifiant pour l'api de google."""
-        
+
         api = self.model.get_api_creditial()
         cse = self.model.get_cse_creditail()
         content_original = self.model.get_creditial()
@@ -90,6 +90,7 @@ class GoogleDorkController(ControllerBase):
                         index_cse_id_for_false = content_original['cse_id'].index(
                             {self.__search_engine_id: True})
 
+                        print(content_original)
                         # NOTE recupere les index des clef qui ne sont pas utiliser
                         index_api_key_for_true = content_original['api_keys'].index({
                                                                                     key_api: False})
@@ -110,19 +111,23 @@ class GoogleDorkController(ControllerBase):
                         content_original['cse_id'][index_cse_id_for_true][self.__search_engine_id] = True
 
                         self.model.set_creditials(content_original)
-                        self.view.save_file(self.model.NAME_FILE_SAVING_CREDENTIALS)
+                        self.view.update_file(
+                            self.model.NAME_FILE_SAVING_CREDENTIALS)
                         return None
 
     def file_type(self):
         """Methode qui effectue une requete a l'api google pour les type de fichier est enregistre les données dans un fichier JSON."""
 
         data = self.model.get_extension()  # NOTE recuper les extensions
-        data_result = {}  # NOTE les titres, les liens seront stockeés dedans
+        # NOTE les titres, les liens seront stockeés dedans
+        data_result = {'': []}
 
         for keys, exts in data.items():  # NOTE boucle sur les donnes recuperer dans le fichier
             for ext in exts:  # NOTE boucle sur la liste d'extension
-                result = self.__requests_uri({'q': f'allintext: {keys} ','fileType': f'{ext}'}) # NOTE effectue les requetes
-                
+                # NOTE effectue les requetes
+                result = self.__requests_uri(
+                    {'q': f'allintext: {keys} ', 'fileType': f'{ext}'})
+
                 if not result.json().get('error') is None:
                     self.view.pivot()
                     self.__pivote_credentials()
@@ -130,8 +135,26 @@ class GoogleDorkController(ControllerBase):
                 items = result.json().get('items')
                 if not items is None:  # NOTE si il y a un resultat ou qu'il y a pas d'erreur
                     for item in items:
+                        data_result[keys] = []
                         data_result[keys].append({item['title']: item['link']})
 
         # NOTE enregistre les données
-        self.model.write_json_dict(self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK, data_result)
+        self.model.write_json_dict(
+            self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK, data_result)
         self.view.save_file(self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK)
+
+    def __del__(self):
+        data = self.model.get_creditial()
+
+        new_dict = {"api_keys": [], 'cse_id': [], "init_creditials": data["init_creditials"]}
+        
+        for api_dict, cse_dict in zip(data['api_keys'], data['cse_id']): 
+            for key_api, key_cse in zip(api_dict.keys(), cse_dict.keys()): 
+                if key_api == data["init_creditials"][0] and key_cse == data['init_creditials'][1]: 
+                    new_dict["api_keys"].append({key_api: True})
+                    new_dict["cse_id"].append({key_cse: True})
+                else: 
+                    new_dict["api_keys"].append({key_api: False})            
+                    new_dict["cse_id"].append({key_cse: False})
+        
+        self.model.set_creditials(new_dict)

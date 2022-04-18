@@ -32,7 +32,7 @@ class ModelGoogleDork(ModelBase):
         """
         
         api_key = self.get_creditial()
-        return api_key['api_keys'] if not api_key is False else False 
+        return api_key.get('api_keys') if not api_key is False else False 
 
     def get_cse_creditail(self): 
         """_summary_
@@ -42,7 +42,18 @@ class ModelGoogleDork(ModelBase):
         """
         
         cse = self.get_creditial()
-        return cse['cse_id'] if not cse is False else False 
+        return cse.get('cse_id') if not cse is False else False 
+    
+    def get_ini_creditial(self): 
+        """_summary_
+
+        Returns:
+            _type_: _description_
+        """
+        
+        init = self.get_creditial()
+        return init.get('init_creditials') if not init is False else False 
+
         
     def set_creditials(self, data: dict): 
         """Ecrit les informations de l'api, cette methode sera utiliser dans les methode de pivot
@@ -53,3 +64,4 @@ class ModelGoogleDork(ModelBase):
         
         with open(self.PATH_DATA+self.NAME_FILE_SAVING_CREDENTIALS, 'w') as f: 
             json.dump(data, f) 
+            

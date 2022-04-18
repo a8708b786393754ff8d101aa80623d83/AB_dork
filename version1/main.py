@@ -24,7 +24,7 @@ google_dork_obj = GoogleDorkController(ModelGoogleDork(), ViewGoogleDork())
 if not scrap.already_registered(ScrapingModel.NAME_FILE_EXTENSION):  
     scrap.save_suffix_extension(extension_suffixe)
     
-if not google_dork_obj.already_registered(ModelGoogleDork.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK): # FIXME mettre cette methode chez google_controller 
+if not google_dork_obj.already_registered(ModelGoogleDork.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK): 
     google_dork_obj.file_type()
 
     

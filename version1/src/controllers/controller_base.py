@@ -1,11 +1,9 @@
-
-
-class ControllerBase: 
+class ControllerBase:
     def __init__(self, model, view):
         self.model = model
-        self.view = view 
-    
-    def already_registered(self, filename: str): 
+        self.view = view
+
+    def already_registered(self, filename: str):
         """_summary_ FIXME
 
         Args:
@@ -14,5 +12,5 @@ class ControllerBase:
         Returns:
             _type_: _description_
         """
-        
-        return self.model.is_save(filename) 
+
+        return self.model.is_save(filename)

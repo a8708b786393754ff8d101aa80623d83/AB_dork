@@ -30,6 +30,7 @@ class ScrapingController(ControllerBase):
         
         extension = []
         self.view.start()
+        print('ici')
         # NOTE Non verife certificat  SSL
         resp = requests.get(url, headers=self.headers, verify=False)
         if resp.ok:

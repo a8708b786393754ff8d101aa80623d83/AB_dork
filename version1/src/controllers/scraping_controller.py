@@ -29,8 +29,6 @@ class ScrapingController(ControllerBase):
         """
         
         extension = []
-        self.view.start()
-        print('ici')
         # NOTE Non verife certificat  SSL
         resp = requests.get(url, headers=self.headers, verify=False)
         if resp.ok:
@@ -51,9 +49,11 @@ class ScrapingController(ControllerBase):
                                 d'extension est la valeur l'url (qui seras remplacer)
         """
         
+        self.view.start()
         new_data = {}
         for keys, ext in data.items():
             new_data[keys] = self.scrap_extension(ext)
+        self.view.end()
 
         # NOTE ecrit les donner dans un fichier json
         self.model.write_json_dict(self.model.NAME_FILE_EXTENSION, new_data)

@@ -25,7 +25,7 @@ class ViewGoogleDork(ViewBase):
         super().__init__()
 
     def update_file(self, name_file: str): 
-        print(Fore.MAGENTA+'[*] Fichier '+name_file+' mis a jour '+Fore.RESET)
+        print(Fore.MAGENTA+'[*] Fichier '+name_file+' a été mis a jour '+Fore.RESET)
         
     def start(self):
         print(Fore.GREEN+'[+] Enregistrement des liens'+Fore.RESET)
@@ -40,3 +40,6 @@ class ViewScraping(ViewBase):
 
     def start(self):
         print(Fore.GREEN+'[+] Enregistrement des extensions'+Fore.RESET)
+        
+    def end(self): 
+        print(Fore.GREEN+'[+] Fin d\'enregistrement des extensions '+Fore.RESET)

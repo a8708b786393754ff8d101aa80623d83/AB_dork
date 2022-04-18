@@ -15,16 +15,15 @@ class GoogleDorkController(ControllerBase):
 
     def __init__(self, model_obj, view_obj):
         super().__init__(model_obj, view_obj)
-        self.page = 1
+        # self.page = 1
         # calculating start, (page=2) => (start=11), (page=3) => (start=21)
-        self.start = (self.page - 1) * 10 + 1
+        # self.start = (self.page - 1) * 10 + 1
 
-        # ayoub AIzaSyBQggYLTLGkNwN1A2IU-ho3Blb7bKI8S4Q
         self.__api_key = 'AIzaSyDBWlnLaAzrqyMRp12_s8Mk3PIJIs1ZkGk'
-        self.__search_engine_id = '3a3d04f12946b5dbf'  # ayoub 4a135df94ee0e5dad
+        self.__search_engine_id = '3a3d04f12946b5dbf'
         self.creditial_use = []
         self.url_base = f'https://www.googleapis.com/customsearch/v1?key={self.__api_key}&cx={self.__search_engine_id}'
-
+        self.pivot = 0 
         self.__init_creditial()
 
     def __init_creditial(self):
@@ -104,12 +103,7 @@ class GoogleDorkController(ControllerBase):
                         # NOTE change les id est met a jour l'url
                         self.__search_engine_id = key_cse
                         self.__api_key = key_api
-                        self.url_base = f'https://www.googleapis.com/customsearch/v1?key={self.__api_key}&cx={self.__search_engine_id}'
-
-                        # NOTE met les id qui vont etre utiliser a True
-                        content_original['api_keys'][index_api_key_for_true][self.__api_key] = True
-                        content_original['cse_id'][index_cse_id_for_true][self.__search_engine_id] = True
-
+                        self.url_base = f'https://www.googleapis.com/customsearch/v1?key={self.__google traduction
                         self.model.set_creditials(content_original)
                         self.view.update_file(
                             self.model.NAME_FILE_SAVING_CREDENTIALS)
@@ -139,22 +133,25 @@ class GoogleDorkController(ControllerBase):
                         data_result[keys].append({item['title']: item['link']})
 
         # NOTE enregistre les données
-        self.model.write_json_dict(
-            self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK, data_result)
+        self.model.write_json_dict(self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK, data_result)
         self.view.save_file(self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK)
 
     def __del__(self):
-        data = self.model.get_creditial()
+        """Met a jour les identifiants d'api pour qu'elle peuvent etre reutiliser par la suite ."""
 
-        new_dict = {"api_keys": [], 'cse_id': [], "init_creditials": data["init_creditials"]}
-        
-        for api_dict, cse_dict in zip(data['api_keys'], data['cse_id']): 
-            for key_api, key_cse in zip(api_dict.keys(), cse_dict.keys()): 
-                if key_api == data["init_creditials"][0] and key_cse == data['init_creditials'][1]: 
+        data = self.model.get_creditial()
+        new_dict = {"api_keys": [], 'cse_id': [],
+                    "init_creditials": data["init_creditials"]}
+
+        for api_dict, cse_dict in zip(data['api_keys'], data['cse_id']):
+            for key_api, key_cse in zip(api_dict.keys(), cse_dict.keys()):
+
+                if key_api == data["init_creditials"][0] and key_cse == data['init_creditials'][1]:
+                    # True aux indentifiant utiliser
                     new_dict["api_keys"].append({key_api: True})
                     new_dict["cse_id"].append({key_cse: True})
-                else: 
-                    new_dict["api_keys"].append({key_api: False})            
+                else:
+                    new_dict["api_keys"].append({key_api: False})
                     new_dict["cse_id"].append({key_cse: False})
-        
+
         self.model.set_creditials(new_dict)

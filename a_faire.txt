@@ -12,6 +12,20 @@ CE QUE J'AI FAIT:
 CE QU'IL RESTE A FAIRE:
 1: verifier si l'enregistrement des liens marches 
 2: recuperer autre chose que les files types FIXME 
+
+#############################
+TEST: 
+
+Models: 
+    GoogleDork: 
+        get_creditial: 
+            1: test le contenue
+            2: test si le fichier est vide est qu'il n existe pas 
+        
+        get_api_creditial: 
+            1: test si elle recupere bien un dictionnaire avec les clef api
+
+
 #############################
 
 

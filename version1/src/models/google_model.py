@@ -56,10 +56,10 @@ class ModelGoogleDork(ModelBase):
 
         
     def set_creditials(self, data: dict): 
-        """Ecrit les informations de l'api, cette methode sera utiliser dans les methode de pivot
+        """Ecrit les informations de l'api, cette methode sera utiliser dans la methode de pivot
 
         Args:
-            data (dict): donnée a ecrire
+            data (dict): donnée a écrire
         """
         
         with open(self.PATH_DATA+self.NAME_FILE_SAVING_CREDENTIALS, 'w') as f: 
@@ -71,8 +71,8 @@ class ModelGoogleDork(ModelBase):
         Returns:
             int|False: nombre de 
         """
+        
         content = self.get_api_creditial()
-
         if content: 
             return len(content)
         return False 

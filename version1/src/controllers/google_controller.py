@@ -122,22 +122,24 @@ class GoogleDorkController(ControllerBase):
 
         data = self.model.get_extension()  # NOTE recuper les extensions
         # NOTE les titres, les liens seront stockeés dedans
-        data_result = {'': []}
+        data_result = {}
         for keys, exts in data.items():  # NOTE boucle sur les donnes recuperer dans le fichier
+            data_result[keys] = []
             for ext in exts:  # NOTE boucle sur la liste d'extension
                 # result = self.__requests_uri({'q': f'allintext: {keys} ', 'fileType': ext })
                 # NOTE effectue les requetes
                 result = self.__requests_uri(
                     {'fileType': ext, 'q': f' "{keys}" '})
 
-                self.get_result(result, keys, data_result)  # ANCHOR tester ici
-
+                items = self.get_items(result, keys)
+                if len(items) > 0:
+                    data_result[keys].append(items)
         # NOTE enregistre les données
         self.model.write_json_dict(
             self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK, data_result)
         self.view.save_file(self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK)
 
-    def get_result(self, resp: requests.Response, keys, data: dict):
+    def get_items(self, resp: requests.Response, keys):
         """Methode qui est utiliser juste apres la requete api, 
 
         Args:
@@ -146,6 +148,7 @@ class GoogleDorkController(ControllerBase):
             data (dict): la ou seront enregistrez les donnée 
         """
 
+        result = []
         if not resp.json().get('error') is None:
             self.view.pivot()
             self.__pivote_credentials()
@@ -153,9 +156,9 @@ class GoogleDorkController(ControllerBase):
         items = resp.json().get('items')
         if not items is None:  # NOTE si il y a un resultat ou qu'il y a pas d'erreur
             for item in items:
-                data[keys] = []
-                data[keys].append({item['title']: item['link']})
-        print(data)
+                result.append({item['title']: item['link']})
+
+        return result
 
     def __del__(self):
         """Met a jour les identifiants d'api pour qu'elle peuvent etre reutiliser par la suite ."""

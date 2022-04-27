@@ -4,7 +4,6 @@ CE QUE J'AI FAIT:
 1: scrapper les extension (si il y en a) est les sauvegarder 
 2: faire des requetes api a google, pivote les identifiants, file type 
 3: 
-
 #################
 
 
@@ -12,22 +11,23 @@ CE QUE J'AI FAIT:
 CE QU'IL RESTE A FAIRE:
 1: verifier si l'enregistrement des liens marches 
 2: recuperer autre chose que les files types FIXME 
+#############################
 
 #############################
 TEST: 
-
 Models: 
     GoogleDork: 
         get_creditial: 
             1: test le contenue
             2: test si le fichier est vide est qu'il n existe pas 
+
+Controllers: 
+    GoogleDork: 
+        pivote_credentials: 
+            1: tester si  elle fait pas d'erruer avec une boucle FIXME
         
-        get_api_creditial: 
-            1: test si elle recupere bien un dictionnaire avec les clef api
-
-
+        get_items: 
+            1 : creer un objet requests.Response, FIXME
 #############################
 
-
 Enregistrement des liens trouver (essayer d'etre plus precis dans la recherche)
-

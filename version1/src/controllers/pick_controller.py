@@ -11,6 +11,7 @@ class PickBase:
         self.headers = {"User-Agent" : "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv :98.0) Gecko/20100101 Firefox/98.0"}
         
         self.url_base = self.__format_url_base(url) 
+        
     def __format_url_base(self, url: str): 
         """Methode privée qui enleve les parametres de l'url  
 
@@ -34,8 +35,8 @@ class PickBase:
             
     
     def __del__(self): 
-        """Ferme le fichier 
-        """
+        """Ferme le fichier."""
+        
         self.file_write.close()
         
     
@@ -57,6 +58,7 @@ class PickEmail(PickBase):
         Args:
             content_page (str): _description_
         """
+        
         for element_one, element_two in zip(content_page.split(':'), content_page.split('\n')): 
             try: 
                 email_probality_one =  element_one.split('\n')[1] # l'email propable 
@@ -83,9 +85,20 @@ class PickEmail(PickBase):
 class PickNum(PickBase): 
     def __init__(self, url: str, view):
             super().__init__(url, view)
+            
+    def get_num_mode_1(self): 
+        with open(self.namefile) as f: 
+            content = f.read().split(',')[0]
+            print(content)
+            self.file_write.write(content)
+        
         
         
     
     def __del__(self):
         return super().__del__()
+
+if __name__ == '__main__': 
+    p = PickNum('', '')
     
+    p.namefile = 'test'

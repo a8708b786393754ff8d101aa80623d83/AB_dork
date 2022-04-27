@@ -46,7 +46,6 @@ class ModelBase:
         Returns:
             dict : donner du fichier 
         """
-
         with open(self.PATH_DATA+self.NAME_FILE_EXTENSION) as f:
             return json.loads(f.read())
         

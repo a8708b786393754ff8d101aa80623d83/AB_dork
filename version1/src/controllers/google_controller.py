@@ -53,23 +53,12 @@ class GoogleDorkController(ControllerBase):
                         content_original['api_keys'].append({key_api: True})
                         content_original['cse_id'].append({key_cse: True})
 
-                        self.model.set_creditials(content_original)
+                        self.model.write_json_dict(
+                            self.model.NAME_FILE_SAVING_CREDENTIALS, content_original)
 
                         return None
 
-    def __requests_uri(self, params: dict):
-        """Effectue les requetes avec les parametres donner.
-
-        Args:
-            params (dict): parametre pour ajouter a l'url
-
-        Returns:
-            requests.Response: reponse de la requete
-        """
-
-        return requests.get(self.url_base, params=params)
-
-    def __pivote_credentials(self):
+    def pivote_credentials(self):
         """Methode qui permet de pivoter d'identifiant pour l'api de google."""
 
         self.pivot += 1
@@ -112,7 +101,8 @@ class GoogleDorkController(ControllerBase):
                         content_original['api_keys'][index_api_key_for_true][self.__api_key] = True
                         content_original['cse_id'][index_cse_id_for_true][self.__search_engine_id] = True
 
-                        self.model.set_creditials(content_original)
+                        self.model.write_json_dict(
+                            self.model.NAME_FILE_SAVING_CREDENTIALS, content_original)
                         self.view.update_file(
                             self.model.NAME_FILE_SAVING_CREDENTIALS)
                         return None
@@ -126,20 +116,21 @@ class GoogleDorkController(ControllerBase):
         for keys, exts in data.items():  # NOTE boucle sur les donnes recuperer dans le fichier
             data_result[keys] = []
             for ext in exts:  # NOTE boucle sur la liste d'extension
-                # result = self.__requests_uri({'q': f'allintext: {keys} ', 'fileType': ext })
+                result = self.requests_uri(
+                    {'q': f'allintext: {keys} ', 'fileType': ext})
                 # NOTE effectue les requetes
-                result = self.__requests_uri(
+                result = self.requests_uri(
                     {'fileType': ext, 'q': f' "{keys}" '})
 
-                items = self.get_items(result, keys)
+                items = self.get_items(result)
                 if len(items) > 0:
                     data_result[keys].append(items)
-        # NOTE enregistre les données
-        self.model.write_json_dict(
-            self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK, data_result)
+
+            self.model.write_json_dict(
+                self.model.NAME_FILE_SAVING_CREDENTIALSNAME_FILE_SAVING_ITEMS_GOOGLE_DORK, data_result)
         self.view.save_file(self.model.NAME_FILE_SAVING_ITEMS_GOOGLE_DORK)
 
-    def get_items(self, resp: requests.Response, keys):
+    def get_items(self, resp: requests.Response):
         """Methode qui est utiliser juste apres la requete api, 
 
         Args:
@@ -151,7 +142,7 @@ class GoogleDorkController(ControllerBase):
         result = []
         if not resp.json().get('error') is None:
             self.view.pivot()
-            self.__pivote_credentials()
+            self.pivote_credentials()
 
         items = resp.json().get('items')
         if not items is None:  # NOTE si il y a un resultat ou qu'il y a pas d'erreur
@@ -164,8 +155,8 @@ class GoogleDorkController(ControllerBase):
         """Met a jour les identifiants d'api pour qu'elle peuvent etre reutiliser par la suite ."""
 
         data = self.model.get_creditial()
-        new_dict = {"api_keys": [], 'cse_id': [],
-                    "init_creditials": data["init_creditials"]}
+        new_dict = {'api_keys': [], 'cse_id': [],
+                    'init_creditials': data['init_creditials']}
 
         for api_dict, cse_dict in zip(data['api_keys'], data['cse_id']):
             for key_api, key_cse in zip(api_dict.keys(), cse_dict.keys()):
@@ -178,4 +169,5 @@ class GoogleDorkController(ControllerBase):
                     new_dict["api_keys"].append({key_api: False})
                     new_dict["cse_id"].append({key_cse: False})
 
-        self.model.set_creditials(new_dict)
+        self.model.write_json_dict(
+            self.model.NAME_FILE_SAVING_CREDENTIALS, new_dict)

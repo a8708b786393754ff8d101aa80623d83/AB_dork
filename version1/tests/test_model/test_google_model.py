@@ -1,17 +1,13 @@
 #! /usr/local/bin/python3.10
 import sys
-sys.path.append('../../src/')
 import unittest
-import faker 
 
-from controllers.google_controller import GoogleDorkController
+sys.path.append('../../src/')
 from models.google_model import ModelGoogleDork
-from views.view import ViewGoogleDork
 
 
-class TestGoogleDork(unittest.TestCase):
+class TestGoogleDorkModel(unittest.TestCase):
     def setUp(self):
-        self.fake = faker.Faker('fr_FR')
         self.model = ModelGoogleDork()
 
     def test_get_creditial_with_content(self): 

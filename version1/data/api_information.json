@@ -1,18 +1,1 @@
-{
-  "api_keys": [
-    { "AIzaSyBQggYLTLGkNwN1A2IU-ho3Blb7bKI8S4Q": false },
-    { "AIzaSyDBWlnLaAzrqyMRp12_s8Mk3PIJIs1ZkGk": false },
-    { "AIzaSyC5sEUyK7zyC4sIxOdYLg9tFTxUxuQzk_g": false },
-    { "AIzaSyCTX03P8xYvjf_t9ErZ7r85D-Rkd0nnltg": true }
-  ],
-  "cse_id": [
-    { "4a135df94ee0e5dad": false },
-    { "3a3d04f12946b5dbf": false },
-    { "cfaac28e5afd61c07": false },
-    { "328fb8378575e5642": true }
-  ],
-  "init_creditials": [
-    "AIzaSyCTX03P8xYvjf_t9ErZ7r85D-Rkd0nnltg",
-    "328fb8378575e5642"
-  ]
-}
+{"api_keys": [{"AIzaSyBQggYLTLGkNwN1A2IU-ho3Blb7bKI8S4Q": false}, {"AIzaSyDBWlnLaAzrqyMRp12_s8Mk3PIJIs1ZkGk": false}, {"AIzaSyC5sEUyK7zyC4sIxOdYLg9tFTxUxuQzk_g": false}, {"AIzaSyCTX03P8xYvjf_t9ErZ7r85D-Rkd0nnltg": true}], "cse_id": [{"4a135df94ee0e5dad": false}, {"3a3d04f12946b5dbf": false}, {"cfaac28e5afd61c07": false}, {"328fb8378575e5642": true}], "init_creditials": ["AIzaSyCTX03P8xYvjf_t9ErZ7r85D-Rkd0nnltg", "328fb8378575e5642"]}

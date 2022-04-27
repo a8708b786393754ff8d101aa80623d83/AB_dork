@@ -53,17 +53,6 @@ class ModelGoogleDork(ModelBase):
         
         init = self.get_creditial()
         return init.get('init_creditials') if not init is False else False 
-
-        
-    def set_creditials(self, data: dict): 
-        """Ecrit les informations de l'api, cette methode sera utiliser dans la methode de pivot
-
-        Args:
-            data (dict): donnée a écrire
-        """
-        
-        with open(self.PATH_DATA+self.NAME_FILE_SAVING_CREDENTIALS, 'w') as f: 
-            json.dump(data, f) 
             
     def get_number_keys_api(self): 
         """Donne le nombre d'identifiant stockée 
@@ -76,3 +65,4 @@ class ModelGoogleDork(ModelBase):
         if content: 
             return len(content)
         return False 
+    

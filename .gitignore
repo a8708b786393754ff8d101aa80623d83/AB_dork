@@ -1,7 +1,3 @@
+**/__pycache__/**
 extension.json
 api_information.json
-src/__pycache__
-controllers/__pycache__
-emails/__pycache__
-models/__pycache__
-views/__pycache__

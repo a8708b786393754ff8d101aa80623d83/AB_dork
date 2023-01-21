@@ -1,5 +1,5 @@
-test.py
 extension.json
+api_information.json
 src/__pycache__
 controllers/__pycache__
 emails/__pycache__

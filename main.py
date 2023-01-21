@@ -1,13 +1,13 @@
 #! /usr/local/bin/python3.10
 import time
 
-from src.controllers.google_controller import GoogleDorkController
-from src.controllers.scraping_controller import ScrapingController
+from dork.controllers.google_controller import GoogleDorkController
+from dork.controllers.scraping_controller import ScrapingController
 
-from src.models.google_model import ModelGoogleDork
-from src.models.srcaping_model import ScrapingModel
+from dork.models.google_model import ModelGoogleDork
+from dork.models.srcaping_model import ScrapingModel
 
-from src.views.view import ViewGoogleDork, ViewScraping
+from dork.views.view import ViewGoogleDork, ViewScraping
 
 start = time.perf_counter()
 

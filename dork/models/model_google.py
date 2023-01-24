@@ -25,8 +25,13 @@ class ModelGoogle(ModelBase, ModelDork):
         """
 
         data = self.get_content_file(self.const.PATH_DATA + self.const.FILENAME_USER_AGENT)
-        return data['chrome'][random.randint(0, len(data['chrome']))]
+        return data['chrome'][random.randint(0, len(data['chrome'])-1 )]
+
+    def blocks_request(self) -> bool: pass
+    
 
     def get_title(self) -> str: pass
 
     def get_all(self) -> list: pass
+    
+    def get_link(self) -> list: pass

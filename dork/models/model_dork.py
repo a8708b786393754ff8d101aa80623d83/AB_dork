@@ -7,6 +7,9 @@ class ModelDork(ABC):
         super().__init__()
 
     @abstractmethod
+    def blocks_request(self) -> bool: pass
+    
+    @abstractmethod
     def get_link(self) -> str: pass
 
     @abstractmethod
@@ -20,6 +23,3 @@ class ModelDork(ABC):
 
     @abstractmethod
     def get_user_agent(self) -> str: pass
-
-    @abstractmethod
-    def get_url(self) -> str: pass

@@ -13,6 +13,7 @@ class ModelBase(object):
 
     def __init__(self) -> None:
         self.const = const
+        self.message_blocks = ''
 
     def get_soup(self, resp: requests.Response) -> BeautifulSoup:
         """Recupere le soup d'une page html

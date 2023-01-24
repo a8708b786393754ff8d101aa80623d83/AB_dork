@@ -1,55 +1,23 @@
-import json
-
 from pathlib import Path
 
+import requests
+import random
+from bs4 import BeautifulSoup
 
-class ModelBase:
-    """Classe qui s'occupe des donner en genérale."""  # FIXME recercie le docstring
+import dork.const as const
 
-    PATH_DATA = 'data/'
-    NAME_FILE_EXTENSION = 'extension.json'
 
-    def __init__(self):
-        self.number_cutt = 150
+class ModelBase(object):
 
-    def write_json_dict(self, filename: str, data: dict):
-        """Ecris les donnes en format JSON dans un fichier JSON.
+    def get_soup(self, resp: requests.Response) -> BeautifulSoup | False:
 
-        Args:
-            filename (str): seulement le nom du fichier
-            data (dict): dictionnaire de donnée a écrire
-        """
+        return BeautifulSoup(resp.text, 'lxml') if resp.ok else False
 
-        with open(self.PATH_DATA+filename, 'w') as f:
-            json.dump(data, f)
-
-    def cutt_list(self, filename: str, filename_ouput: str):
-        """Coupe le fichier en pars, tout en gardant l'originale, on laisse le choix a l'utilisateur ou il peut stocker la sortit.
-
-        Args:
-            filename (str): seulement nom du fichier
-            filename_ouput (str): nom du fichier/ chemin relatife
-        """
-
-        with open(self.PATH_DATA+filename, 'r') as f:
-            with open(filename_ouput, 'w') as f_two:
-
-                for line in f.readlines()[:self.number_cutt]:
-                    if line != '':
-                        f_two.write(f'{line}')
-
-    def get_extension(self):
-        """Cherche le fichier d'extensions est donne le resultat, cette methode seras/dois utiliser que si le fichier existse.
-
-        Args:
-            filename (str): nom du fichier (non le chemin relative)
-
-        Returns:
-            dict : donner du fichier 
-        """
-
-        with open(self.PATH_DATA+self.NAME_FILE_EXTENSION) as f:
-            return json.loads(f.read())
+    def get_user_agent_random(self) -> str:
+        
+        with open(const.PATH_DATA+const.FILENAME_USER_AGENT) as f:
+            lines = f.readlines()
+        return lines[random.randint(0, len(lines)-1)]
 
     def is_save(self, filename: str):
         """Methode qui regarde si le fichier existse.

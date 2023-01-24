@@ -35,7 +35,7 @@ class ControllerGoogle(ControllerBase, ControllerDork):
         resp = self.get_resp()
         
         if resp.ok: 
-            print(resp.text)
+            print(resp.text) #FIXME regler ca
             
     def extension(self): 
         pass 

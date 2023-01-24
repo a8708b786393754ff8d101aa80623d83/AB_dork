@@ -1,6 +1,4 @@
 import requests
-from bs4 import BeautifulSoup
-
 
 class ControllerBase(object):
     def __init__(self, model, view):
@@ -8,7 +6,7 @@ class ControllerBase(object):
         self.view = view
         self.params = {}
 
-    def requests_uri(self) -> requests.Response:
+    def get_resp(self) -> requests.Response:
         """Effectue les requetes avec les parametres donner.
 
         Returns:

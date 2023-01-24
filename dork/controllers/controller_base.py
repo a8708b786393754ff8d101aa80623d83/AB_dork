@@ -1,10 +1,15 @@
 import requests
 
 class ControllerBase(object):
+    navigator: str
+    search_engine: str
+    user_agent: str
+    
     def __init__(self, model, view):
         self.model = model
         self.view = view
         self.params = {}
+
 
     def get_resp(self) -> requests.Response:
         """Effectue les requetes avec les parametres donner.

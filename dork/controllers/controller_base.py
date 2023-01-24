@@ -15,11 +15,11 @@ class ControllerBase(object):
     def __init__(self, model, view):
         self.model = model
         self.view = view
-        self.url: str
-        self.navigator: str
-        self.search_engine: str
-        self.user_agent: str
-        self.params: dict
+        self.url = str
+        self.navigator = str
+        self.search_engine = str
+        self.user_agent = str
+        self.params = {}
 
     def get_resp(self) -> requests.Response:
         """Effectue une requetes en donnent les parametre est les user agent.

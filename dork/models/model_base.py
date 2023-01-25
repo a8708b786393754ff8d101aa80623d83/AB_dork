@@ -25,7 +25,7 @@ class ModelBase(object):
             BeautifulSoup: soup du contenue de la page
         """
 
-        return BeautifulSoup(resp.text, 'lxml') if resp.ok else None
+        return BeautifulSoup(resp.content, 'lxml') if resp.ok else None
 
     def get_content_file(self, filename: str) -> dict: 
         """Recupere le contenue d'un fichier 

@@ -16,8 +16,6 @@ class ControllerBase(object):
         self.model = model
         self.view = view
         self.url = ''
-        self.navigator = ''
-        self.search_engine = ''
         self.user_agent = ''
         self.params = {}
         self.headers = {'User-agent': '',

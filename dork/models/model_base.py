@@ -12,6 +12,8 @@ class ModelBase(object):
     """Classe de base des models."""
 
     def __init__(self) -> None:
+        self.navigator = ''
+        self.search_engine = ''
         self.const = const
         self.message_blocks = ''
 

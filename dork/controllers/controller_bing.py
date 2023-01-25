@@ -8,19 +8,21 @@ class ControllerBing(ControllerBase, ControllerDork):
         self.navigator = 'chrome'
         self.search_engine = 'bingbot'
 
-    def set_user_agent() -> None:
-        pass
+    def set_user_agent(self) -> None:
+        """Ajoute un user_agent."""
 
-    def set_url() -> None: pass
+        self.user_agent = self.model.get_user_agent()
+        self.headers['User-agent'] = self.user_agent
 
-    def file_type(self):
-        return super().file_type()
+    def set_url(self) -> None:
+        """Ajoute l'url on recuperer le lien de google."""
 
-    def extension(self):
-        return super().extension()
+        self.url = self.model.get_link_search()
 
-    def in_text(self):
-        return super().in_text()
+    def file_type(self): pass
 
-    def in_all_text(self):
-        return super().in_all_text()
+    def extension(self): pass
+
+    def in_text(self): pass
+
+    def in_all_text(self): pass

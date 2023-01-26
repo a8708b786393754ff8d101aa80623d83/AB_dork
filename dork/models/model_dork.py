@@ -10,16 +10,16 @@ class ModelDork(ABC):
     def blocks_request(self) -> bool: pass
     
     @abstractmethod
-    def get_link(self) -> str: pass
-
+    def get_user_agent(self) -> str: pass
+    
     @abstractmethod
     def get_link_search(self) -> str: pass
 
     @abstractmethod
-    def get_title(self) -> str: pass
+    def get_link(self, a: str) -> str: pass
 
     @abstractmethod
-    def get_all(self) -> list: pass
+    def get_title(self, h2: str) -> str: pass
 
     @abstractmethod
-    def get_user_agent(self) -> str: pass
+    def get_all(self, soup) -> list: pass

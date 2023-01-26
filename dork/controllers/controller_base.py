@@ -15,6 +15,7 @@ class ControllerBase(object):
     def __init__(self, model, view):
         self.model = model
         self.view = view
+        self.query = ''
         self.url = ''
         self.item = ''
         self.user_agent = ''
@@ -41,11 +42,13 @@ class ControllerBase(object):
         """Ajoute les parametre, 
         elle concatene la valeur de la clef si elle existe, sinon elle ajoute tout simplement."""
         
-        for key, value in data.items(): 
+        for key, value in data.items():
             if key in self.params:
-                self.params[key] += f' {value}'
+                self.params[key] += f'{value} '
             else: 
                 self.params[key] = value
+            self.query += f'{value} ' #NOTE ajoute la requete
+
 
     def set_user_agent(self) -> None:
         """Ajoute un user agent."""

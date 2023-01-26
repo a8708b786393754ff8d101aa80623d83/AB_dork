@@ -24,6 +24,8 @@ def run(controller: object) -> None:
         controller.in_text(arg.in_text)
     if arg.in_all_text:
         controller.in_all_text(arg.in_all_text)
+    
+    controller.view.query(controller.query)
 
 
 if arg.google:

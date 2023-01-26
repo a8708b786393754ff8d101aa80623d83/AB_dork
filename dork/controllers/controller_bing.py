@@ -38,10 +38,8 @@ class ControllerBing(ControllerBase, ControllerDork):
                 except AttributeError:
                     pass
                 else:
-                    pass
-                   # self.view.title(title)
-                  # self.view.link(link)
-
+                    self.view.title(title)
+                    self.view.link(link)
 
     def in_text(self, element: str) -> None:
         if self.params.get('q'):
@@ -58,12 +56,11 @@ class ControllerBing(ControllerBase, ControllerDork):
                     link = self.model.get_link(li)
                 except AttributeError:
                     pass
-                else: pass 
-                    # print(title, link)
-                   # self.view.title(title)
-                  # self.view.link(link)
+                else:
+                    self.view.title(title)
+                    self.view.link(link)
 
-    def in_all_text(self, element: str): 
+    def in_all_text(self, element: str):
         if self.params.get('q'):
             self.params['q'] += f' inalltext:"{element}"'
         else:
@@ -78,9 +75,8 @@ class ControllerBing(ControllerBase, ControllerDork):
                     link = self.model.get_link(li)
                 except AttributeError:
                     pass
-                else:  pass 
-                    # print(title, link)
-                   # self.view.title(title)
-                  # self.view.link(link)
+                else:
+                    self.view.title(title)
+                    self.view.link(link)
 
     def extension(self): pass

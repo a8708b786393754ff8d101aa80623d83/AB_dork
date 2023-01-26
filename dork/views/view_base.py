@@ -12,12 +12,8 @@ class ViewBase(object):
         BANNIERE
         """)
 
-    def params(self, params: dict):
-        query = ''
-        for key, value in params.items():
-            query += key + value
-
-        print(self.back.LIGHTBLUE_EX + self.fore.CYAN +
+    def query(self, query: dict):
+        print(self.back.LIGHTRED_EX + self.fore.WHITE +
               f'Query: {query}' + self.fore.RESET + self.back.RESET)
 
     def start_msg(self):

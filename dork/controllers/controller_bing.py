@@ -7,11 +7,16 @@ class ControllerBing(ControllerBase, ControllerDork):
         super().__init__(model, view)
         self.navigator = 'chrome'
         self.search_engine = 'bingbot'
+        self.item = ''
 
         self.set_url()
         self.set_user_agent()
 
         self.view.user_agent(self.user_agent)
+
+    def set_item(self, item: str): 
+        self.set_item = item
+        self.params['q'] = item 
 
     def set_user_agent(self) -> None:
         """Ajoute un user agent."""

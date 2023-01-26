@@ -12,6 +12,8 @@ class ControllerGoogle(ControllerBase, ControllerDork):
         self.set_user_agent()
         self.set_url()
 
+        self.view.user_agent(self.user_agent)
+
     def set_params(self):
         """Ajoute les parametre à l'attribut params qui seront utilisée dans la requete."""
 

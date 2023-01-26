@@ -11,6 +11,8 @@ class ControllerBing(ControllerBase, ControllerDork):
         self.set_url()
         self.set_user_agent()
 
+        self.view.user_agent(self.user_agent)
+
     def set_user_agent(self) -> None:
         """Ajoute un user agent."""
 

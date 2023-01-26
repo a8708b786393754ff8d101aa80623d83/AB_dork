@@ -13,13 +13,7 @@ class ControllerGoogle(ControllerBase, ControllerDork):
         self.set_url()
 
         self.view.user_agent(self.user_agent)
-    
-    def set_params(self):
-        """Ajoute les parametre à l'attribut params qui seront utilisée dans la requete."""
 
-        self.params['source'] = 'lnms'
-        self.params['tbm'] = 'nws'
-    
     def file_type(self, element: str):
         """Effectue une requete avec le mot clef filetype
 
@@ -27,8 +21,7 @@ class ControllerGoogle(ControllerBase, ControllerDork):
             element (str): element entrez par l'utilisateur pour la recherche
         """
 
-        self.params['q'] = f'"{element}"'
-        self.set_params()
+        self.set_params({'q': f'filetype:"{element}" '})
         resp = self.get_resp()
         if resp.ok:
             print(resp.url)

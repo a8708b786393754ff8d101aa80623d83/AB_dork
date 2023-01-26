@@ -34,10 +34,10 @@ class ModelBing(ModelBase, ModelDork):
         return data[self.navigator]
 
     def get_link(self, div: bs4.element.Tag) -> str:
-        return super().get_link(div)
+        return div.h2.a['href']
 
     def get_title(self, div: bs4.element.Tag) -> str:
-        return super().get_title(div)
+        return div.h2.a.text
 
     def get_all(self, soup: bs4.BeautifulSoup) -> list:
         return super().get_all(soup)

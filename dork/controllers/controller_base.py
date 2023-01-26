@@ -28,8 +28,24 @@ class ControllerBase(object):
 
     
     def set_item(self, item: str): 
+        """Ajoute un item (element de la recher)
+
+        Args:
+            item (str): element a rechercher
+        """
+
         self.set_item = item
         self.params['q'] = item 
+
+    def set_params(self, data: dict):
+        """Ajoute les parametre, 
+        elle concatene la valeur de la clef si elle existe, sinon elle ajoute tout simplement."""
+        
+        for key, value in data.items(): 
+            if key in self.params:
+                self.params[key] += f' {value}'
+            else: 
+                self.params[key] = value
 
     def set_user_agent(self) -> None:
         """Ajoute un user agent."""

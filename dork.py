@@ -14,12 +14,26 @@ from args import parser
 arg = parser()
 
 
+def run(controller: object) -> None:
+    if arg.element: 
+        controller.set_item(arg.element)
+
+    if arg.file_type:
+        controller.file_type(arg.file_type)
+    if arg.in_text:
+        controller.in_text(arg.in_text)
+    if arg.in_all_text:
+        controller.in_all_text(arg.in_all_text)
+
+
 if arg.google:
     google = ControllerGoogle(ModelGoogle(), ViewGoogle())
+    run(google)
 
 
 elif arg.bing:
     bing = ControllerBing(ModelBing(), ViewBing())
+    run(bing)
 
 else:
     print('choisi')

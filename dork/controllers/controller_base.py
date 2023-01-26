@@ -16,6 +16,7 @@ class ControllerBase(object):
         self.model = model
         self.view = view
         self.url = ''
+        self.item = ''
         self.user_agent = ''
         self.params = {}
         self.headers = {'User-agent': '',
@@ -34,8 +35,7 @@ class ControllerBase(object):
             item (str): element a rechercher
         """
 
-        self.set_item = item
-        self.params['q'] = item 
+        self.params['q'] =  self.item = item
 
     def set_params(self, data: dict):
         """Ajoute les parametre, 
@@ -50,8 +50,7 @@ class ControllerBase(object):
     def set_user_agent(self) -> None:
         """Ajoute un user agent."""
 
-        self.user_agent = self.model.get_user_agent()
-        self.headers['User-agent'] = self.user_agent
+        self.headers['User-agent'] = self.user_agent = self.model.get_user_agent()
 
     
     def set_url(self) -> None:

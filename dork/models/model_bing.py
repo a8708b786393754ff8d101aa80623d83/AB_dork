@@ -1,6 +1,7 @@
 from .model_base import ModelBase
 from .model_dork import ModelDork
 
+import bs4 
 
 class ModelBing(ModelBase, ModelDork):
     def __init__(self) -> None:
@@ -9,8 +10,6 @@ class ModelBing(ModelBase, ModelDork):
         self.search_engine = 'bing'
 
     def blocks_request(self) -> bool: pass
-
-    def get_link(self) -> str: pass
 
     def get_link_search(self) -> str:
         """Recupere le lien de recherche de google
@@ -23,10 +22,6 @@ class ModelBing(ModelBase, ModelDork):
             self.const.PATH_DATA + self.const.FILENAME_LINKS)
         return data[self.search_engine]
 
-    def get_title(self) -> str: pass
-
-    def get_all(self) -> list: pass
-
     def get_user_agent(self) -> str:
         """Recupere un user agent 
 
@@ -37,3 +32,12 @@ class ModelBing(ModelBase, ModelDork):
         data = self.get_content_file(
             self.const.PATH_DATA + self.const.FILENAME_USER_AGENT)
         return data[self.navigator]
+
+    def get_link(self, div: bs4.element.Tag) -> str:
+        return super().get_link(div)
+
+    def get_title(self, div: bs4.element.Tag) -> str:
+        return super().get_title(div)
+
+    def get_all(self, soup: bs4.BeautifulSoup) -> list:
+        return super().get_all(soup)

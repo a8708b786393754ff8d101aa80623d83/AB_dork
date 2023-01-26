@@ -2,6 +2,7 @@ from .model_base import ModelBase
 from .model_dork import ModelDork
 
 import random
+import bs4
 
 
 class ModelGoogle(ModelBase, ModelDork):
@@ -34,8 +35,11 @@ class ModelGoogle(ModelBase, ModelDork):
 
     def blocks_request(self) -> bool: pass
 
-    def get_title(self) -> str: pass
+    def get_link(self, div: bs4.element.Tag) -> str:
+        return super().get_link(div)
 
-    def get_all(self) -> list: pass
+    def get_title(self, div: bs4.element.Tag) -> str:
+        return super().get_title(div)
 
-    def get_link(self) -> list: pass
+    def get_all(self, soup: bs4.BeautifulSoup) -> list:
+        return super().get_all(soup)

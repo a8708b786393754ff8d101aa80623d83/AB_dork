@@ -5,8 +5,6 @@ from .controller_dork import ControllerDork
 class ControllerGoogle(ControllerBase, ControllerDork):
     def __init__(self, model, view):
         super().__init__(model, view)
-        self.navigator = 'chrome'
-        self.search_engine = 'google'
 
         self.headers['Referer'] = 'https://www.google.com/'
         self.headers['Authority'] = 'www.google.com'
@@ -15,6 +13,8 @@ class ControllerGoogle(ControllerBase, ControllerDork):
         self.set_url()
 
     def set_params(self):
+        """Ajoute les parametre à l'attribut params qui seront utilisée dans la requete."""
+
         self.params['source'] = 'lnms'
         self.params['tbm'] = 'nws'
 

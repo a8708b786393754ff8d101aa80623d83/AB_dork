@@ -14,20 +14,6 @@ class ControllerBing(ControllerBase, ControllerDork):
 
         self.view.user_agent(self.user_agent)
 
-    def set_item(self, item: str): 
-        self.set_item = item
-        self.params['q'] = item 
-
-    def set_user_agent(self) -> None:
-        """Ajoute un user agent."""
-
-        self.user_agent = self.model.get_user_agent()
-        self.headers['User-agent'] = self.user_agent
-
-    def set_url(self) -> None:
-        """Ajoute l'url on recuperer le lien de google."""
-
-        self.url = self.model.get_link_search()
 
     def file_type(self, element: str) -> None:
         if self.params.get('q'):

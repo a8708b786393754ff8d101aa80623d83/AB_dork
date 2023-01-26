@@ -7,15 +7,6 @@ class ControllerDork(ABC):
         super().__init__()
 
     @abstractmethod
-    def set_item(self, item: str) -> None:  pass 
-
-    @abstractmethod
-    def set_user_agent(self) -> None: pass
-
-    @abstractmethod
-    def set_url(self) -> None: pass
-
-    @abstractmethod
     def file_type(self, element: str) -> None: pass
 
     @abstractmethod

@@ -8,6 +8,18 @@ from dork.models.model_bing import ModelBing
 from dork.views.view_google import ViewGoogle
 from dork.views.view_bing import ViewBing
 
+from args import parser
 
-google = ControllerGoogle(ModelGoogle(), ViewGoogle())
-bing = ControllerBing(ModelBing(), ViewBing())
+
+arg = parser()
+
+
+if arg.google:
+    google = ControllerGoogle(ModelGoogle(), ViewGoogle())
+
+
+elif arg.bing:
+    bing = ControllerBing(ModelBing(), ViewBing())
+
+else:
+    print('choisi')

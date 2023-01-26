@@ -16,11 +16,7 @@ class ControllerBing(ControllerBase, ControllerDork):
 
 
     def file_type(self, element: str) -> None:
-        if self.params.get('q'):
-            self.params['q'] += f' filetype:"{element}"'
-        else:
-            self.params['q'] = f' filetype:"{element}"'
-
+        self.set_params({'q': f'filetype:"{element}"'})
         resp = self.get_resp()
         if resp.ok:
             soup = self.model.get_soup(resp)
@@ -35,12 +31,9 @@ class ControllerBing(ControllerBase, ControllerDork):
                     self.view.link(link)
 
     def in_text(self, element: str) -> None:
-        if self.params.get('q'):
-            self.params['q'] += f' intext:"{element}"'
-        else:
-            self.params['q'] = f'intext:"{element}"'
-
+        self.set_params({'q': f'intext:"{element}"'})
         resp = self.get_resp()
+
         if resp.ok:
             soup = self.model.get_soup(resp)
             for li in soup.select('main li'):
@@ -54,11 +47,8 @@ class ControllerBing(ControllerBase, ControllerDork):
                     self.view.link(link)
 
     def in_all_text(self, element: str):
-        if self.params.get('q'):
-            self.params['q'] += f' inalltext:"{element}"'
-        else:
-            self.params['q'] = f'inalltext:"{element}"'
 
+        self.set_params({'q': f'inalltext:"{element}"'})
         resp = self.get_resp()
         if resp.ok:
             soup = self.model.get_soup(resp)

@@ -3,7 +3,7 @@ from .controller_dork import ControllerDork
 
 
 class ControllerGoogle(ControllerBase, ControllerDork):
-    def __init__(self, model, view):
+    def __init__(self, model, view)->None:
         super().__init__(model, view)
         self.navigator = 'chrome'
         self.search_engine = 'google'
@@ -14,7 +14,7 @@ class ControllerGoogle(ControllerBase, ControllerDork):
         self.set_user_agent()
         self.set_url()
 
-    def file_type(self, element: str):
+    def file_type(self, element: str)->None:
         """Effectue une requete avec le mot clef filetype
 
         Args:
@@ -27,8 +27,8 @@ class ControllerGoogle(ControllerBase, ControllerDork):
             print(resp.url)
             print(resp.request.headers)  # FIXME regler ca
 
-    def extension(self): pass
+    def extension(self)->None: pass
 
-    def in_text(self): pass
+    def in_text(self)->None: pass
 
-    def in_all_text(self): pass
+    def in_all_text(self)->None: pass

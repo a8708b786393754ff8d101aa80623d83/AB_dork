@@ -3,7 +3,7 @@ from .controller_dork import ControllerDork
 
 
 class ControllerBing(ControllerBase, ControllerDork):
-    def __init__(self, model, view):
+    def __init__(self, model, view)->None:
         super().__init__(model, view)
         self.navigator = 'bingbot'
         self.search_engine = 'bing'
@@ -12,7 +12,7 @@ class ControllerBing(ControllerBase, ControllerDork):
         self.set_user_agent()
 
 
-    def set_page_count(self, page: int):
+    def set_page_count(self, page: int)->None:
         if page == 1:
             self.set_params({'first': 1, 'FORM': 'PERE'})
         elif page == 2:
@@ -46,4 +46,4 @@ class ControllerBing(ControllerBase, ControllerDork):
     def in_all_text(self, element: str) -> None:
         self.set_params({'q': f'inalltext:"{element}"'})
 
-    def extension(self): pass
+    def extension(self)->None: pass

@@ -12,7 +12,7 @@ class ControllerBase(object):
 
     """
 
-    def __init__(self, model, view):
+    def __init__(self, model, view)->None:
         self.model = model
         self.view = view
         self.query = ''
@@ -29,7 +29,7 @@ class ControllerBase(object):
                         'Upgrade-Insecure-Requests': '1'}
 
     
-    def set_item(self, item: str): 
+    def set_item(self, item: str)->None: 
         """Ajoute un item (element de la recher)
 
         Args:
@@ -38,7 +38,7 @@ class ControllerBase(object):
 
         self.params['q'] =  self.item = self.query = f'{item} '
     
-    def set_query(self, element: str|int): 
+    def set_query(self, element: str|int)->None: 
         """Ajoute l'emement a la requete, la requete prend que les dorks,
             elle evite les parametres comme les conteur de page 
             ou autres qui n'ont rien avoir avec les requetes dork
@@ -52,7 +52,7 @@ class ControllerBase(object):
                     self.query += f'{element} '
 
 
-    def set_params(self, data: dict):
+    def set_params(self, data: dict)->None:
         """Ajoute les parametre, 
         elle concatene la valeur de la clef si elle existe, sinon elle ajoute tout simplement."""
         for key, value in data.items():

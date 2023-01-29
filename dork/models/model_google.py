@@ -1,12 +1,20 @@
 from .model_base import ModelBase
 from .model_dork import ModelDork
 
-import random
 import bs4
 
 
 class ModelGoogle(ModelBase, ModelDork):
-    def __init__(self):
+    """Classe model des donnée de google.
+
+    Args:
+        ModelBase (object): model de base
+        ModelDork (object): model des dorks
+    """
+
+    def __init__(self) -> None:
+        """Methode constructrice."""
+
         super().__init__()
         self.navigator = 'chrome'
         self.search_engine = 'google'
@@ -14,10 +22,37 @@ class ModelGoogle(ModelBase, ModelDork):
     def blocks_request(self) -> bool: pass
 
     def get_link(self, div: bs4.element.Tag) -> str:
+        """Recupere le lien
+
+        Args:
+            div (bs4.element.Tag): balise div HTML
+
+        Returns:
+            str: lien de la balise a.
+        """
+
         return super().get_link(div)
 
     def get_title(self, div: bs4.element.Tag) -> str:
+        """Recupere le titre
+
+        Args:
+            div (bs4.element.Tag): balise div HTML
+
+        Returns:
+            str: titre de la balise a.
+        """
+
         return super().get_title(div)
 
     def get_all(self, soup: bs4.BeautifulSoup) -> list:
-        return super().get_all(soup)
+        """Recupere tout les informations 
+
+        Args:
+            soup (bs4.BeautifulSoup): soup de la page 
+
+        Returns:
+            list: données. 
+        """
+
+        raise NotImplementedError

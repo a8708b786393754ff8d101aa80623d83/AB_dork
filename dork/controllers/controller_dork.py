@@ -7,6 +7,9 @@ class ControllerDork(ABC):
         super().__init__()
 
     @abstractmethod
+    def search(self, page: int = 1) -> None: pass
+
+    @abstractmethod
     def file_type(self, element: str) -> None: pass
 
     @abstractmethod

@@ -36,18 +36,32 @@ class ControllerBase(object):
             item (str): element a rechercher
         """
 
-        self.params['q'] =  self.item = item
+        self.params['q'] =  self.item = self.query = f'{item} '
+    
+    def set_query(self, element: str|int): 
+        """Ajoute l'emement a la requete, la requete prend que les dorks,
+            elle evite les parametres comme les conteur de page 
+            ou autres qui n'ont rien avoir avec les requetes dork
+
+        Args:
+            element (str): element a ajoutée 
+        """
+        if type(element) == str: 
+            for dork in self.model.const.DORK: 
+                if element.startswith(dork): 
+                    self.query += f'{element} '
+
 
     def set_params(self, data: dict):
         """Ajoute les parametre, 
         elle concatene la valeur de la clef si elle existe, sinon elle ajoute tout simplement."""
-        
         for key, value in data.items():
+            self.set_query(value)
+            
             if key in self.params:
                 self.params[key] += f'{value} '
             else: 
                 self.params[key] = value
-            self.query += f'{value} ' #NOTE ajoute la requete
 
 
     def set_user_agent(self) -> None:

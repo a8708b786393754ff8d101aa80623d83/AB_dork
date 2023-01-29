@@ -14,8 +14,6 @@ class ControllerGoogle(ControllerBase, ControllerDork):
         self.set_user_agent()
         self.set_url()
 
-        self.view.user_agent(self.user_agent)
-
     def file_type(self, element: str):
         """Effectue une requete avec le mot clef filetype
 

@@ -45,7 +45,7 @@ class ModelGoogle(ModelBase, ModelDork):
 
         return super().get_title(div)
 
-    def get_all(self, soup: bs4.BeautifulSoup) -> list:
+    def get_main_node(self, soup: bs4.BeautifulSoup) -> list:
         """Recupere tout les informations 
 
         Args:

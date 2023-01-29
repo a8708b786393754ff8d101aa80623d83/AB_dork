@@ -45,8 +45,8 @@ class ModelBing(ModelBase, ModelDork):
 
         return div.h2.a.text
 
-    def get_all(self, soup: bs4.BeautifulSoup) -> list:
-        """Recupere tout les informations 
+    def get_main_node(self, soup: bs4.BeautifulSoup) -> list[bs4.element.Tag]:
+        """Recupere le noeud main
 
         Args:
             soup (bs4.BeautifulSoup): soup de la page 
@@ -55,4 +55,4 @@ class ModelBing(ModelBase, ModelDork):
             list: données. 
         """
 
-        raise NotImplementedError
+        return soup.find_all('main li')

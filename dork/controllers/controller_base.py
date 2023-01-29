@@ -36,7 +36,7 @@ class ControllerBase(object):
             item (str): element a rechercher
         """
 
-        self.params['q'] =  self.item = f'{item} '
+        self.params['q'] =  self.item = self.query = f'{item} '
     
     def set_query(self, element: str|int): 
         """Ajoute l'emement a la requete, la requete prend que les dorks,

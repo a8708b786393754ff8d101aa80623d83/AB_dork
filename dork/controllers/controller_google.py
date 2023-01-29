@@ -14,18 +14,11 @@ class ControllerGoogle(ControllerBase, ControllerDork):
         self.set_user_agent()
         self.set_url()
 
+    def search(self) -> None:pass 
+    
+
     def file_type(self, element: str)->None:
-        """Effectue une requete avec le mot clef filetype
-
-        Args:
-            element (str): element entrez par l'utilisateur pour la recherche
-        """
-
         self.set_params({'q': f'filetype:"{element}" '})
-        resp = self.get_resp()
-        if resp.ok:
-            print(resp.url)
-            print(resp.request.headers)  # FIXME regler ca
 
     def extension(self)->None: pass
 

@@ -36,7 +36,7 @@ class ControllerBase(object):
             item (str): element a rechercher
         """
 
-        self.params['q'] =  self.item = item
+        self.params['q'] =  self.item = f'{item} '
 
     def set_params(self, data: dict):
         """Ajoute les parametre, 

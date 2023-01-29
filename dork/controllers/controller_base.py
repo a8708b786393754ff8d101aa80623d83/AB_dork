@@ -81,7 +81,7 @@ class ControllerBase(object):
         self.headers['User-agent'] = self.user_agent = self.model.get_user_agent()
 
     def set_url(self) -> None:
-        """Ajoute l'url, on recuperer le lien de google."""
+        """Ajoute l'url, on recuperer le lien du moteur de recherche."""
 
         self.url = self.model.get_link_search()
 

@@ -5,8 +5,8 @@ from .controller_dork import ControllerDork
 class ControllerBing(ControllerBase, ControllerDork):
     def __init__(self, model, view):
         super().__init__(model, view)
-        self.navigator = 'chrome'
-        self.search_engine = 'bingbot'
+        self.navigator = 'bingbot'
+        self.search_engine = 'bing'
 
         self.set_url()
         self.set_user_agent()
@@ -23,6 +23,7 @@ class ControllerBing(ControllerBase, ControllerDork):
 
     def search(self) -> None:
         resp = self.get_resp()
+        self.view.url(resp.url)
         if resp.ok:
             soup = self.model.get_soup(resp)
 
@@ -35,6 +36,7 @@ class ControllerBing(ControllerBase, ControllerDork):
                 else:
                     self.view.title(title)
                     self.view.link(link)
+            
 
     def file_type(self, element: str) -> None:
         self.set_params({'q': f'filetype:"{element}"'})

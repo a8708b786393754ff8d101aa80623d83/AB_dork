@@ -26,44 +26,51 @@ class ControllerBing(ControllerBase, ControllerDork):
         self.set_user_agent()
 
     def set_page_count(self, page: int) -> None:
-        """Ajoute le parametre pour le nombre de page. 
+        """Ajoute a l'attribut counter_page le nombre de page 
 
         Args:
             page (int): numero de page a afficher 
         """
 
-        if page == 1:
-            self.set_params({'first': 1, 'FORM': 'PERE'})
-        elif page == 2:
-            self.set_params({'first': int(f'{page-1}1'), 'FORM': 'PERE'})
-        else:
-            self.set_params(
-                {'first': int(f'{page-1}1'), 'FORM': f'PERE{page-2}'})
+        self.counter_page = page
 
     def search(self) -> None:
         """Methode de recherche, elle recupere la reponse de la requete, 
             le titre, lien grace au model.
             Elle affiche les resultats grace a la vue.
+            Tout est fait dans un boucle while.
         """
 
-        resp = self.get_resp()
-        self.view.url(resp.url)
+        while self.counter_page != 0:
+            resp = self.get_resp()
+            self.view.url(resp.url)
 
-        if resp.ok:
-            soup = self.model.get_soup(resp)
-            node_main = self.model.get_main_node(soup)
+            if resp.ok:
+                soup = self.model.get_soup(resp)
+                node_main = self.model.get_main_node(soup)
 
-            for li in node_main:
-                try:
-                    title = self.model.get_title(li)
-                    link = self.model.get_link(li)
+                for li in node_main:
+                    try:
+                        title = self.model.get_title(li)
+                        link = self.model.get_link(li)
 
-                except AttributeError:
-                    pass
+                    except AttributeError:
+                        pass
 
-                else:
-                    self.view.title(title)
-                    self.view.link(link)
+                    else:
+                        self.view.title(title)
+                        self.view.link(link)
+
+            if self.counter_page == 1:
+                self.set_params({'first': 1, 'FORM': 'PERE'})
+            elif self.counter_page == 2:
+                self.set_params(
+                    {'first': int(f'{self.counter_page-1}1'), 'FORM': 'PERE'})
+            else:
+                self.set_params(
+                    {'first': int(f'{self.counter_page-1}1'), 'FORM': f'PERE{self.counter_page-2}'})
+
+            self.counter_page -= 1
 
     def file_type(self, element: str) -> None:
         """Ajoute le mot clef filetype à l'attribut params

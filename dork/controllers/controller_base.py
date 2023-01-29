@@ -57,11 +57,12 @@ class ControllerBase(object):
         elle concatene la valeur de la clef si elle existe, sinon elle ajoute tout simplement."""
         
         for key, value in data.items():
+            self.set_query(value)
+            
             if key in self.params:
                 self.params[key] += f'{value} '
             else: 
                 self.params[key] = value
-            self.query += f'{value} ' #NOTE ajoute la requete
 
 
     def set_user_agent(self) -> None:

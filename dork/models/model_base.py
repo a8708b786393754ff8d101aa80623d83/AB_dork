@@ -37,7 +37,7 @@ class ModelBase(object):
 
         data = self.get_content_file(
             self.const.PATH_DATA + self.const.FILENAME_USER_AGENT)
-        return data[self.navigator][random.randint(0, len(data[self.navigator])-1)]
+        return random.choice(data[self.navigator])
 
     def get_soup(self, resp: requests.Response) -> BeautifulSoup:
         """Recupere le soup d'une page html
@@ -51,7 +51,7 @@ class ModelBase(object):
 
         return BeautifulSoup(resp.content, 'lxml') if resp.ok else None
 
-    def get_content_file(self, filename: str) -> dict: 
+    def get_content_file(self, filename: str) -> dict:
         """Recupere le contenue d'un fichier 
 
         Args:
@@ -61,5 +61,5 @@ class ModelBase(object):
            dict: data
         """
 
-        with open(filename) as f: 
+        with open(filename) as f:
             return json.load(f)

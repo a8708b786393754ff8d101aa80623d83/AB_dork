@@ -48,15 +48,19 @@ class ControllerBing(ControllerBase, ControllerDork):
 
         resp = self.get_resp()
         self.view.url(resp.url)
+
         if resp.ok:
             soup = self.model.get_soup(resp)
+            node_main = self.model.get_main_node(soup)
 
-            for li in soup.select('main li'):
+            for li in node_main:
                 try:
                     title = self.model.get_title(li)
                     link = self.model.get_link(li)
+
                 except AttributeError:
                     pass
+
                 else:
                     self.view.title(title)
                     self.view.link(link)

@@ -15,3 +15,6 @@ class ViewBing(ViewBase, ViewDork):
     def user_agent(self, user_agent: str):
         print(self.fore.GREEN +
               f'[*-*]User agent: {user_agent}' + self.fore.RESET)
+
+    def url(self, url: str) -> None:
+        print(self.fore.YELLOW + f'[+*-*+]Url: {url} ' + self.fore.RESET)

@@ -55,4 +55,4 @@ class ModelBing(ModelBase, ModelDork):
             list: données. 
         """
 
-        return soup.find_all('main li')
+        return soup.select('main li')

@@ -1,17 +1,23 @@
+import json
+import random
 from pathlib import Path
 
 import requests
-import random
-import json
 from bs4 import BeautifulSoup
 
 import dork.const as const
 
 
 class ModelBase(object):
-    """Classe de base des models."""
+    """Model de base. 
+
+    Args:
+        object (_type_): objet 
+    """
 
     def __init__(self) -> None:
+        """Methode constructrice."""
+
         self.navigator = ''
         self.search_engine = ''
         self.const = const

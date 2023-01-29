@@ -12,7 +12,14 @@ class ControllerBase(object):
 
     """
 
-    def __init__(self, model, view):
+    def __init__(self, model, view) -> None:
+        """Methode constructrice
+
+        Args:
+            model (object): objet model
+            view (object): objet view
+        """
+
         self.model = model
         self.view = view
         self.query = ''
@@ -28,56 +35,58 @@ class ControllerBase(object):
                         'Connection': 'keep-alive',
                         'Upgrade-Insecure-Requests': '1'}
 
-    
-    def set_item(self, item: str): 
-        """Ajoute un item (element de la recher)
+    def set_item(self, item: str) -> None:
+        """Ajoute un item (element de la recher).
 
         Args:
-            item (str): element a rechercher
+            item (str): element a rechercher.
         """
 
-        self.params['q'] =  self.item = self.query = f'{item} '
-    
-    def set_query(self, element: str|int): 
+        self.params['q'] = self.item = self.query = f'{item} '
+
+    def set_query(self, element: str | int) -> None:
         """Ajoute l'emement a la requete, la requete prend que les dorks,
             elle evite les parametres comme les conteur de page 
-            ou autres qui n'ont rien avoir avec les requetes dork
+            ou autres qui n'ont rien avoir avec les requetes dork.
 
         Args:
-            element (str): element a ajoutée 
+            element (str): element a ajoutée.
         """
-        if type(element) == str: 
-            for dork in self.model.const.DORK: 
-                if element.startswith(dork): 
+
+        if isinstance(element, str):
+            for dork in self.model.const.DORK:
+                if element.startswith(dork):
                     self.query += f'{element} '
 
-
-    def set_params(self, data: dict):
+    def set_params(self, data: dict) -> None:
         """Ajoute les parametre, 
-        elle concatene la valeur de la clef si elle existe, sinon elle ajoute tout simplement."""
+        elle concatene la valeur de la clef si elle existe, 
+        sinon elle ajoute a l'aatribut params.
+
+        Args:
+            data (dict): donnée a inserez.
+        """
+
         for key, value in data.items():
             self.set_query(value)
-            
+
             if key in self.params:
                 self.params[key] += f'{value} '
-            else: 
+            else:
                 self.params[key] = value
-
 
     def set_user_agent(self) -> None:
         """Ajoute un user agent."""
 
         self.headers['User-agent'] = self.user_agent = self.model.get_user_agent()
 
-    
     def set_url(self) -> None:
-        """Ajoute l'url on recuperer le lien de google."""
+        """Ajoute l'url, on recuperer le lien du moteur de recherche."""
 
         self.url = self.model.get_link_search()
 
-
     def get_resp(self) -> requests.Response:
-        """Effectue une requetes en donnent les parametre est les user agent.
+        """Effectue une requetes GET en donnent les parametre est les user agent.
 
         Returns:
             requests.Response: reponse de la requete

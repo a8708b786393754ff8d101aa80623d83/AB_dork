@@ -3,7 +3,21 @@ from .controller_dork import ControllerDork
 
 
 class ControllerGoogle(ControllerBase, ControllerDork):
-    def __init__(self, model, view):
+    """Classe controller du moteur de recherche google.
+
+    Args:
+        ControllerBase (object): controller de base 
+        ControllerDork (object): controller des dork
+    """
+
+    def __init__(self, model, view) -> None:
+        """Methode constructrice.
+
+        Args:
+            model (object): Model du controller
+            view (object): View du controller
+        """
+
         super().__init__(model, view)
         self.navigator = 'chrome'
         self.search_engine = 'google'
@@ -14,23 +28,43 @@ class ControllerGoogle(ControllerBase, ControllerDork):
         self.set_user_agent()
         self.set_url()
 
-        self.view.user_agent(self.user_agent)
+    def search(self) -> None:
+        """Methode de recherche."""
 
-    def file_type(self, element: str):
-        """Effectue une requete avec le mot clef filetype
+        pass
+
+    def file_type(self, element: str) -> None:
+        """Ajoute le mot clef filetype à l'attribut params
 
         Args:
-            element (str): element entrez par l'utilisateur pour la recherche
+            element (str): element de recherche du dork
         """
 
         self.set_params({'q': f'filetype:"{element}" '})
-        resp = self.get_resp()
-        if resp.ok:
-            print(resp.url)
-            print(resp.request.headers)  # FIXME regler ca
 
-    def extension(self): pass
+    def extension(self, element: str) -> None:
+        """Ajoute le mot clef extension à l'attribut params
 
-    def in_text(self): pass
+        Args:
+            element (str): element de recherche du dork
+        """
 
-    def in_all_text(self): pass
+        self.set_params({'q': f'extension:"{element}" '})
+
+    def in_text(self, element: str) -> None:
+        """Ajoute le mot clef intext à l'attribut params
+
+        Args:
+            element (str): element de recherche du dork
+        """
+
+        self.set_params({'q': f'intext:"{element}" '})
+
+    def in_all_text(self, element: str) -> None:
+        """Ajoute le mot clef inallatext à l'attribut params
+
+        Args:
+            element (str): element de recherche du dork
+        """
+
+        self.set_params({'q': f'inalltext:"{element}" '})

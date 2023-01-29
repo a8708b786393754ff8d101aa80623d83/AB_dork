@@ -15,6 +15,8 @@ arg = parser()
 
 
 def run(controller: object) -> None:
+    controller.set_page_count(arg.counter_page)
+
     if arg.element: 
         controller.set_item(arg.element)
 
@@ -25,6 +27,7 @@ def run(controller: object) -> None:
     if arg.in_all_text:
         controller.in_all_text(arg.in_all_text)
     
+    controller.search()
     controller.view.query(controller.query)
 
 

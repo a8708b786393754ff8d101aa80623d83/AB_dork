@@ -22,6 +22,7 @@ class ControllerBase(object):
 
         self.model = model
         self.view = view
+        self.counter_page = int
         self.query = ''
         self.url = ''
         self.item = ''
@@ -71,7 +72,8 @@ class ControllerBase(object):
             self.set_query(value)
 
             if key in self.params:
-                self.params[key] += f'{value} '
+                if not isinstance(value, int):
+                    self.params[key] += f'{value} '
             else:
                 self.params[key] = value
 

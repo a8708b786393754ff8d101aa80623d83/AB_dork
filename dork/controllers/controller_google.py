@@ -10,7 +10,7 @@ class ControllerGoogle(ControllerBase, ControllerDork):
         ControllerDork (object): controller des dork
     """
 
-    def __init__(self, model, view)->None:
+    def __init__(self, model, view) -> None:
         """Methode constructrice.
 
         Args:
@@ -31,10 +31,9 @@ class ControllerGoogle(ControllerBase, ControllerDork):
     def search(self) -> None:
         """Methode de recherche."""
 
-        pass 
-    
+        pass
 
-    def file_type(self, element: str)->None:
+    def file_type(self, element: str) -> None:
         """Ajoute le mot clef filetype à l'attribut params
 
         Args:
@@ -43,7 +42,7 @@ class ControllerGoogle(ControllerBase, ControllerDork):
 
         self.set_params({'q': f'filetype:"{element}" '})
 
-    def extension(self, element: str)->None: 
+    def extension(self, element: str) -> None:
         """Ajoute le mot clef extension à l'attribut params
 
         Args:
@@ -52,8 +51,7 @@ class ControllerGoogle(ControllerBase, ControllerDork):
 
         self.set_params({'q': f'extension:"{element}" '})
 
-
-    def in_text(self, element: str)->None: 
+    def in_text(self, element: str) -> None:
         """Ajoute le mot clef intext à l'attribut params
 
         Args:
@@ -62,9 +60,7 @@ class ControllerGoogle(ControllerBase, ControllerDork):
 
         self.set_params({'q': f'intext:"{element}" '})
 
-
-
-    def in_all_text(self, element: str)->None: 
+    def in_all_text(self, element: str) -> None:
         """Ajoute le mot clef inallatext à l'attribut params
 
         Args:
@@ -72,4 +68,3 @@ class ControllerGoogle(ControllerBase, ControllerDork):
         """
 
         self.set_params({'q': f'inalltext:"{element}" '})
-

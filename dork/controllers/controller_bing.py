@@ -17,9 +17,9 @@ class ControllerBing(ControllerBase, ControllerDork):
         if page == 1:
             self.set_params({'first': 1, 'FORM': 'PERE'})
         elif page == 2:
-            self.set_params({'first': int(f'{page}1'), 'FORM': 'PERE'})
+            self.set_params({'first': int(f'{page-1}1'), 'FORM': 'PERE'})
         else:
-            self.set_params({'first': int(f'{page}1'), 'FORM': f'PERE{page-2}'})
+            self.set_params({'first': int(f'{page-1}1'), 'FORM': f'PERE{page-2}'})
 
     def search(self) -> None:
         resp = self.get_resp()

@@ -37,6 +37,20 @@ class ControllerBase(object):
         """
 
         self.params['q'] =  self.item = f'{item} '
+    
+    def set_query(self, element: str): 
+        """Ajoute l'emement a la requete, la requete prend que les dorks,
+            elle evite les parametres comme les conteur de page 
+            ou autres qui n'ont rien avoir avec les requetes dork
+
+        Args:
+            element (str): element a ajoutée 
+        """
+
+        for dork in self.model.const.DORK: 
+            if element.startswith(dork): 
+                self.query += f'{element} '
+
 
     def set_params(self, data: dict):
         """Ajoute les parametre, 

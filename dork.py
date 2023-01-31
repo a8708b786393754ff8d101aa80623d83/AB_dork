@@ -1,12 +1,15 @@
 #! /usr/bin/python3
 from dork.controllers.controller_google import ControllerGoogle
 from dork.controllers.controller_bing import ControllerBing
+from dork.controllers.controller_duck_duck_go import ControllerDuckDuckGo
 
 from dork.models.model_google import ModelGoogle
 from dork.models.model_bing import ModelBing
+from dork.models.model_duck_duck_go import ModelDuckDuckGo
 
 from dork.views.view_google import ViewGoogle
 from dork.views.view_bing import ViewBing
+from dork.views.view_duck_duck_go import ViewDuckDuckGo
 
 from args import parser
 
@@ -42,6 +45,10 @@ if arg.google:
 elif arg.bing:
     bing = ControllerBing(ModelBing(), ViewBing())
     run(bing)
+
+elif arg.duck_duck_go: 
+    duck_duck_go = ControllerDuckDuckGo(ModelDuckDuckGo(), ViewDuckDuckGo())
+    run(duck_duck_go)
 
 else:
     print('choisi')

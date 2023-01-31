@@ -19,11 +19,6 @@ class ControllerBing(ControllerBase, ControllerDork):
         """
 
         super().__init__(model, view)
-        self.navigator = 'bingbot'
-        self.search_engine = 'bing'
-
-        self.set_url()
-        self.set_user_agent()
 
     def set_page_count(self, page: int) -> None:
         """Ajoute a l'attribut counter_page le nombre de page 

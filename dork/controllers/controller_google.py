@@ -19,14 +19,9 @@ class ControllerGoogle(ControllerBase, ControllerDork):
         """
 
         super().__init__(model, view)
-        self.navigator = 'chrome'
-        self.search_engine = 'google'
 
         self.headers['Referer'] = 'https://www.google.com/'
         self.headers['Authority'] = 'www.google.com'
-
-        self.set_user_agent()
-        self.set_url()
 
     def search(self) -> None:
         """Methode de recherche."""

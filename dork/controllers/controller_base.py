@@ -36,6 +36,9 @@ class ControllerBase(object):
                         'Connection': 'keep-alive',
                         'Upgrade-Insecure-Requests': '1'}
 
+        self.set_url()
+        self.set_user_agent()
+
     def set_item(self, item: str) -> None:
         """Ajoute un item (element de la recher).
 
@@ -93,5 +96,4 @@ class ControllerBase(object):
         Returns:
             requests.Response: reponse de la requete
         """
-
         return requests.get(self.url, params=self.params, headers=self.headers, verify=True)

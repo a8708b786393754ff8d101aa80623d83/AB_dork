@@ -24,6 +24,7 @@ class ModelBase(object):
         self.operator_dork = ''
 
         self.const = const
+        self.set_operator()
 
     def get_link_search(self) -> str:
         """Recupere le lien de recherche de google
@@ -51,7 +52,7 @@ class ModelBase(object):
         """Ajoute a l'attribut operator une liste des operateur dork."""
 
         self.operator_dork = self.get_content_file(
-            self.const.PATH_DATA + self.const.FILENAME_DORK)
+            self.const.PATH_DATA + self.const.FILENAME_DORK)['dork']
 
     def get_soup(self, resp: requests.Response) -> BeautifulSoup:
         """Recupere le soup d'une page html

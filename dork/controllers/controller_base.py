@@ -58,7 +58,7 @@ class ControllerBase(object):
         """
 
         if isinstance(element, str):
-            for dork in self.model.const.DORK:
+            for dork in self.model.operator_dork:
                 if element.startswith(dork):
                     self.query += f'{element} '
 
@@ -96,5 +96,5 @@ class ControllerBase(object):
         Returns:
             requests.Response: reponse de la requete
         """
-        
+
         return requests.get(self.url, params=self.params, headers=self.headers, verify=True)

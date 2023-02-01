@@ -4,3 +4,4 @@ DORK = ['intext', 'inalltext', 'inurl', 'inallurl', 'filetype', 'site', 'blogurl
 
 FILENAME_USER_AGENT = 'user_agent.json'
 FILENAME_LINKS = 'links.json'
+FILENAME_DORK = 'operator.json'

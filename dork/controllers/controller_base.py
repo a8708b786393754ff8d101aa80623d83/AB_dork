@@ -96,4 +96,5 @@ class ControllerBase(object):
         Returns:
             requests.Response: reponse de la requete
         """
+        
         return requests.get(self.url, params=self.params, headers=self.headers, verify=True)

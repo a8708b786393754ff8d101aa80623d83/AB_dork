@@ -22,7 +22,7 @@ class ControllerBase(object):
 
         self.model = model
         self.view = view
-        self.counter_page = int
+        self.counter_page = 0
         self.query = ''
         self.url = ''
         self.item = ''
@@ -78,7 +78,7 @@ class ControllerBase(object):
                 if not isinstance(value, int):
                     self.params[key] += f'{value} '
             else:
-                self.params[key] = value
+                self.params[key] = f'{value} '
 
     def set_user_agent(self) -> None:
         """Ajoute un user agent."""

@@ -20,10 +20,10 @@ arg = parser()
 def run(controller: object) -> None:
     controller.view.banner()
     controller.view.user_agent(controller.user_agent)
-    
+
     controller.set_page_count(arg.counter_page)
 
-    if arg.element: 
+    if arg.element:
         controller.set_item(arg.element)
 
     if arg.file_type:
@@ -32,7 +32,21 @@ def run(controller: object) -> None:
         controller.in_text(arg.in_text)
     if arg.in_all_text:
         controller.in_all_text(arg.in_all_text)
-    
+    if arg.map:
+        controller.map(arg.map)
+    if arg.film:
+        controller.film(arg.film)
+    if arg.in_anchor:
+        controller.in_anchor(arg.in_anchor)
+    if arg.blog_url:
+        controller.blog_url(arg.blog_url)
+    if arg.loc:
+        controller.loc(arg.loc)
+    if arg.site:
+        controller.site(arg.site)
+    if arg.extension: 
+        controller.extension(arg.extension)
+
     controller.search()
     controller.view.query(controller.query)
 
@@ -46,7 +60,7 @@ elif arg.bing:
     bing = ControllerBing(ModelBing(), ViewBing())
     run(bing)
 
-elif arg.duck_duck_go: 
+elif arg.duck_duck_go:
     duck_duck_go = ControllerDuckDuckGo(ModelDuckDuckGo(), ViewDuckDuckGo())
     run(duck_duck_go)
 

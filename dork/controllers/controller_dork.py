@@ -25,3 +25,23 @@ class ControllerDork(ABC):
 
     @abstractmethod
     def in_all_text(self, element: str) -> None: ...
+    
+    @abstractmethod
+    def map(self, element: str) -> None: ...
+
+    @abstractmethod
+    def film(self, element: str) -> None: ...
+
+    @abstractmethod
+    def in_anchor(self, element: str) -> None: ...
+
+    @abstractmethod
+    def blog_url(self, element: str) -> None: ...
+
+    @abstractmethod
+    def loc(self, element: str) -> None: ...
+
+    @abstractmethod
+    def site(self, element: str) -> None: ...
+
+

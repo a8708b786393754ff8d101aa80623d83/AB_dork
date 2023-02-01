@@ -1,0 +1,16 @@
+{
+    "dork": [
+        "site",
+        "loc",
+        "inanchor",
+        "blogurl",
+        "inalltext",
+        "inurl",
+        "inallurl",
+        "intext",
+        "extension",
+        "map",
+        "filetype",
+        "ext"
+    ]
+}

@@ -20,8 +20,10 @@ class ModelBase(object):
 
         self.navigator = ''
         self.search_engine = ''
-        self.const = const
         self.message_blocks = ''
+        self.operator_dork = ''
+
+        self.const = const
 
     def get_link_search(self) -> str:
         """Recupere le lien de recherche de google
@@ -44,6 +46,12 @@ class ModelBase(object):
         data = self.get_content_file(
             self.const.PATH_DATA + self.const.FILENAME_USER_AGENT)
         return random.choice(data[self.navigator])
+
+    def set_operator(self):
+        """Ajoute a l'attribut operator une liste des operateur dork."""
+
+        self.operator_dork = self.get_content_file(
+            self.const.PATH_DATA + self.const.FILENAME_DORK)
 
     def get_soup(self, resp: requests.Response) -> BeautifulSoup:
         """Recupere le soup d'une page html

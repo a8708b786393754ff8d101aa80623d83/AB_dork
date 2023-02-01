@@ -13,6 +13,7 @@ def parser():
     arg.add_argument('--blog-url', type=str, help='Dork to blogurl')
     arg.add_argument('--loc', type=str, help='Dork to loc')
     arg.add_argument('--site', type=str, help='Dork to site')
+    arg.add_argument('--extension', type=str, help='Dork to extension')
     
     arg.add_argument('-c', '--counter-page', type=int, default=1, help='Number page for requests')
 

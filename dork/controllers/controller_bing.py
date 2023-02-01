@@ -95,7 +95,12 @@ class ControllerBing(ControllerBase, ControllerDork):
         self.set_params({'q': f'inalltext:"{element}"'})
 
     def extension(self, element: str) -> None: 
-        
+        """Ajoute le mot clef extension à l'attribut params
+
+        Args:
+            element (str): element de recherche du dork
+        """
+
         self.set_params({'q': f'ext:"{element}"'})
 
 

@@ -59,6 +59,3 @@ class ControllerDuckDuckGo(ControllerBase, ControllerDork):
         self.set_params({'q': f'inalltext:"{element}"'})
         
     def extension(self) -> None: pass
-
-    def set_page_count(self, page:int=0): pass 
-

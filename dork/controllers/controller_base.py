@@ -57,7 +57,7 @@ class ControllerBase:
             element (str): element a ajoutée.
         """
 
-        if isinstance(element, str):
+        if isinstance(element, str): #NOTE opere dessus que si l'emenet est une chaine de caractere
             for dork in self.model.operator_dork:
                 if element.startswith(dork):
                     self.query += f'{element} '

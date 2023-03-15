@@ -64,6 +64,7 @@ class ControllerBing(ControllerBase, ControllerDork):
                 self.set_params(
                     {'first': int(f'{self.counter_page-1}1'), 'FORM': f'PERE{self.counter_page-2}'})
 
+            self.view.space_separator()
             self.counter_page -= 1
 
     def file_type(self, element: str) -> None:

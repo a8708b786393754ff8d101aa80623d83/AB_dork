@@ -32,3 +32,8 @@ class ViewBase:
 
         print(self.back.LIGHTRED_EX + self.fore.WHITE +
               f'Query: {query}' + self.fore.RESET + self.back.RESET)
+        
+    def space_separator(self) -> None: 
+        """Ajoute un espace, cette methode ajoute un seperateur entre les urls de requete."""
+        
+        print(self.fore.MAGENTA + '[*-*--------------------------------------------------*-*] \n' + self.fore.RESET)

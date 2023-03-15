@@ -25,7 +25,7 @@ class ViewBing(ViewBase, ViewDork):
         print(self.fore.RED + f'[+*+]Title: {title}' + self.fore.RESET)
 
     def link(self, link: str) -> None:
-        """Afficfhe un lien
+        """Affiche un lien
 
         Args:
             link (str): lien

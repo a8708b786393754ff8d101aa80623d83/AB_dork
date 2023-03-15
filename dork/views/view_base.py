@@ -2,12 +2,8 @@ from colorama import Fore
 from colorama import Back
 
 
-class ViewBase(object):
-    """Classe de vue de base
-
-    Args:
-        object (_type_): objet
-    """
+class ViewBase:
+    """Classe de vue de base."""
 
     def __init__(self) -> None:
         """Methode constructrice."""

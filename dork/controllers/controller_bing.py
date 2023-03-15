@@ -1,7 +1,6 @@
 from .controller_base import ControllerBase
 from .controller_dork import ControllerDork
 
-
 class ControllerBing(ControllerBase, ControllerDork):
     """Classe controller du moteur de recherche bing. 
 
@@ -94,7 +93,7 @@ class ControllerBing(ControllerBase, ControllerDork):
 
         self.set_params({'q': f'inalltext:"{element}"'})
 
-    def extension(self, element: str) -> None: 
+    def extension(self, element: str) -> None:
         """Ajoute le mot clef extension à l'attribut params
 
         Args:

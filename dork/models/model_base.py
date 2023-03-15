@@ -8,12 +8,8 @@ from bs4 import BeautifulSoup
 import dork.const as const
 
 
-class ModelBase(object):
-    """Model de base. 
-
-    Args:
-        object (_type_): objet 
-    """
+class ModelBase:
+    """Model de base."""
 
     def __init__(self) -> None:
         """Methode constructrice."""
@@ -39,7 +35,6 @@ class ModelBase(object):
 
     def get_user_agent(self) -> str:
         """Recupere un user agent 
-
         Returns:
             str: user agent
         """

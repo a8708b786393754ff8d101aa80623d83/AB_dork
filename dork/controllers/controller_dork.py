@@ -12,36 +12,34 @@ class ControllerDork(ABC):
         super().__init__()
 
     @abstractmethod
-    def search(self, page: int) -> None: ...
+    def search(self, page: int) -> None: pass
 
     @abstractmethod
-    def file_type(self, element: str) -> None: ...
+    def file_type(self, element: str) -> None: pass
 
     @abstractmethod
-    def extension(self, element: str) -> None: ...
+    def extension(self, element: str) -> None: pass
 
     @abstractmethod
-    def in_text(self, element: str) -> None: ...
+    def in_text(self, element: str) -> None: pass
 
     @abstractmethod
-    def in_all_text(self, element: str) -> None: ...
-    
-    @abstractmethod
-    def map(self, element: str) -> None: ...
+    def in_all_text(self, element: str) -> None: pass
 
     @abstractmethod
-    def film(self, element: str) -> None: ...
+    def map(self, element: str) -> None: pass
 
     @abstractmethod
-    def in_anchor(self, element: str) -> None: ...
+    def film(self, element: str) -> None: pass
 
     @abstractmethod
-    def blog_url(self, element: str) -> None: ...
+    def in_anchor(self, element: str) -> None: pass
 
     @abstractmethod
-    def loc(self, element: str) -> None: ...
+    def blog_url(self, element: str) -> None: pass
 
     @abstractmethod
-    def site(self, element: str) -> None: ...
+    def loc(self, element: str) -> None: pass
 
-
+    @abstractmethod
+    def site(self, element: str) -> None: pass

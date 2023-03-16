@@ -15,8 +15,6 @@ class ModelDork(ABC):
 
         super().__init__()
 
-    @abstractmethod
-    def blocks_request(self) -> bool: ...
 
     @abstractmethod
     def get_link(self, div: bs4.element.Tag) -> str: ...

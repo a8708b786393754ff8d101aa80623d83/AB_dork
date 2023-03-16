@@ -19,7 +19,6 @@ class ModelGoogle(ModelBase, ModelDork):
         self.navigator = 'chrome'
         self.search_engine = 'google'
 
-    def blocks_request(self) -> bool: pass
 
     def get_link(self, div: bs4.element.Tag) -> str:
         """Recupere le lien

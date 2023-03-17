@@ -2,12 +2,8 @@ from colorama import Fore
 from colorama import Back
 
 
-class ViewBase(object):
-    """Classe de vue de base
-
-    Args:
-        object (_type_): objet
-    """
+class ViewBase:
+    """Classe de vue de base."""
 
     def __init__(self) -> None:
         """Methode constructrice."""
@@ -36,3 +32,8 @@ class ViewBase(object):
 
         print(self.back.LIGHTRED_EX + self.fore.WHITE +
               f'Query: {query}' + self.fore.RESET + self.back.RESET)
+        
+    def space_separator(self) -> None: 
+        """Ajoute un espace, cette methode ajoute un seperateur entre les urls de requete."""
+        
+        print(self.fore.MAGENTA + '[*-*--------------------------------------------------*-*] \n' + self.fore.RESET)

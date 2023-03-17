@@ -55,5 +55,3 @@ class ModelDuckDuckGo(ModelBase, ModelDork):
         """
 
         return soup.find_all('article')
-
-    def blocks_request(self) -> bool: pass

@@ -1,7 +1,7 @@
 import requests
 
 
-class ControllerBase(object):
+class ControllerBase:
     """Classe de base des controller
 
     La méthode constructrice initialise des attributs est initailise deux object, le model est la vue
@@ -57,7 +57,7 @@ class ControllerBase(object):
             element (str): element a ajoutée.
         """
 
-        if isinstance(element, str):
+        if isinstance(element, str): #NOTE opere dessus que si l'emenet est une chaine de caractere
             for dork in self.model.operator_dork:
                 if element.startswith(dork):
                     self.query += f'{element} '
@@ -73,7 +73,7 @@ class ControllerBase(object):
 
         for key, value in data.items():
             self.set_query(value)
-
+            
             if key in self.params:
                 if not isinstance(value, int):
                     self.params[key] += f'{value} '

@@ -57,28 +57,32 @@ class ControllerBase:
             element (str): element a ajoutée.
         """
 
-        if isinstance(element, str): #NOTE opere dessus que si l'emenet est une chaine de caractere
+        if isinstance(element, str):  # NOTE opere dessus que si l'element est une chaine de caractere
             for dork in self.model.operator_dork:
                 if element.startswith(dork):
                     self.query += f'{element} '
 
-    def set_params(self, data: dict) -> None:
-        """Ajoute les parametre, 
-        elle concatene la valeur de la clef si elle existe, 
-        sinon elle ajoute a l'aatribut params.
+    def set_params(self, data: dict, counter_page: bool=False) -> None:
+        """Ajoute les parametre pour la requete, concatene si la clef existe deja.
+        Si l'argument counter_page est vrai, il ajoute simplement les données 
 
         Args:
             data (dict): donnée a inserez.
+            counter_page (bool): compteur de page
         """
 
         for key, value in data.items():
-            self.set_query(value)
-            
-            if key in self.params:
-                if not isinstance(value, int):
-                    self.params[key] += f'{value} '
-            else:
-                self.params[key] = f'{value} '
+            if counter_page: 
+                self.params[key] = value
+            else: 
+                
+                self.set_query(value)
+
+                if key in self.params:
+                    if not isinstance(value, int): 
+                        self.params[key] += f'{value} '
+                else:
+                    self.params[key] = f'{value} '
 
     def set_user_agent(self) -> None:
         """Ajoute un user agent."""

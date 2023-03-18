@@ -1,6 +1,7 @@
 from .controller_base import ControllerBase
 from .controller_dork import ControllerDork
 
+
 class ControllerBing(ControllerBase, ControllerDork):
     """Classe controller du moteur de recherche bing. 
 
@@ -34,8 +35,19 @@ class ControllerBing(ControllerBase, ControllerDork):
             Elle affiche les resultats grace a la vue.
             Tout est fait dans un boucle while.
         """
+        cmpt = 1
 
-        while self.counter_page != 0:
+        while cmpt <= self.counter_page:
+            if cmpt == 1:
+                self.set_params({'first': "1", 'FORM': 'PERE'}, True)
+
+            elif cmpt == 2:
+                self.set_params({'first': "11", 'FORM': 'PERE'}, True)
+
+            else:
+                self.set_params(
+                    {'first': f'{cmpt-1}1', 'FORM': f'PERE{cmpt-2}'}, True)
+            
             resp = self.get_resp()
             self.view.url(resp.url)
 
@@ -55,17 +67,8 @@ class ControllerBing(ControllerBase, ControllerDork):
                         self.view.title(title)
                         self.view.link(link)
 
-            if self.counter_page == 1:
-                self.set_params({'first': 1, 'FORM': 'PERE'})
-            elif self.counter_page == 2:
-                self.set_params(
-                    {'first': int(f'{self.counter_page-1}1'), 'FORM': 'PERE'})
-            else:
-                self.set_params(
-                    {'first': int(f'{self.counter_page-1}1'), 'FORM': f'PERE{self.counter_page-2}'})
-
             self.view.space_separator()
-            self.counter_page -= 1
+            cmpt += 1
 
     def file_type(self, element: str) -> None:
         """Ajoute le mot clef filetype à l'attribut params
@@ -102,7 +105,6 @@ class ControllerBing(ControllerBase, ControllerDork):
         """
 
         self.set_params({'q': f'ext:"{element}"'})
-
 
     def map(self, element: str) -> None:
         """Ajoute le mot clef map a l'attribut params

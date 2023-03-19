@@ -44,7 +44,7 @@ def run(controller: object) -> None:
         controller.loc(arg.loc)
     if arg.site:
         controller.site(arg.site)
-    if arg.extension: 
+    if arg.extension:
         controller.extension(arg.extension)
 
     controller.search()

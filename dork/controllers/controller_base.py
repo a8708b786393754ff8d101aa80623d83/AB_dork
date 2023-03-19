@@ -22,7 +22,6 @@ class ControllerBase:
 
         self.model = model
         self.view = view
-        self.__utils = utils
         self.counter_page = 0
         self.query = ''
         self.url = ''
@@ -31,8 +30,8 @@ class ControllerBase:
         self.params = {}
         self.headers = {}
 
-        self.set_url()
-        self.set_header()
+        self.init_url()
+        self.init_header()
         
     def set_page_count(self, page: int) -> None:
         """Ajoute a l'attribut counter_page le nombre de page 
@@ -88,13 +87,13 @@ class ControllerBase:
                 else:
                     self.params[key] = f'{value} '
 
-    def set_url(self) -> None:
-        """Ajoute l'url, on recuperer le lien du moteur de recherche."""
+    def init_url(self) -> None:
+        """Injecte l'url, on recuperer le lien du moteur de recherche."""
 
         self.url = self.model.get_link_search()
         
-    def set_header(self) -> None: 
-        """_summary_"""
+    def init_header(self) -> None: 
+        """Injecte le headers dans son attribut."""
         
         self.headers = self.model.get_header()
 
@@ -105,6 +104,96 @@ class ControllerBase:
             requests.Response: reponse de la requete
         """
         if proxy: 
-            proxy = self.__utils.get_proxy()
+            proxy = utils.get_proxy()
 
-        return requests.get(self.url, params=self.params, headers=self.headers, verify=True, proxies=proxy)
+        return requests.get(self.url, params=self.params, headers=self.headers, verify=True, proxies=proxy, timeout=2)
+    
+    def file_type(self, element: str) -> None:
+        """Ajoute le mot clef filetype à l'attribut params
+
+        Args:
+            element (str): element de recherche du dork
+        """
+
+        self.set_params({'q': f'filetype:"{element}"'})
+
+    def in_text(self, element: str) -> None:
+        """Ajoute le mot clef intext à l'attribut params
+
+        Args:
+            element (str): element de recherche du dork
+        """
+
+        self.set_params({'q': f'intext:"{element}"'})
+
+    def in_all_text(self, element: str) -> None:
+        """Ajoute le mot clef inalltext à l'attribut params
+
+        Args:
+            element (str): element de recherche du dork
+        """
+
+        self.set_params({'q': f'inalltext:"{element}"'})
+
+    def extension(self, element: str) -> None:
+        """Ajoute le mot clef extension à l'attribut params
+
+        Args:
+            element (str): element de recherche du dork
+        """
+
+        self.set_params({'q': f'ext:"{element}"'})
+
+    def map(self, element: str) -> None:
+        """Ajoute le mot clef map a l'attribut params
+
+        Args:
+            element (str): element de recherche
+        """
+
+        self.set_params({'q': f'map:"{element}"'})
+
+    def film(self, element: str) -> None:
+        """Ajoute le mot clef film a l'attribut params
+
+        Args:
+            element (str): element de recherche
+        """
+
+        self.set_params({'q': f'film:"{element}"'})
+
+    def in_anchor(self, element: str) -> None:
+        """Ajoute le mot clef inanchor a l'attribut params
+
+        Args:
+            element (str): element de recherche
+        """
+
+        self.set_params({'q': f'inanchor:"{element}"'})
+
+    def blog_url(self, element: str) -> None:
+        """Ajoute le mot clef blogurl a l'attribut params
+
+        Args:
+            element (str): element de recherche
+        """
+
+        self.set_params({'q': f'blogurl:"{element}"'})
+
+    def loc(self, element: str) -> None:
+        """Ajoute le mot clef loc a l'attribut params
+
+        Args:
+            element (str): element de recherche
+        """
+
+        self.set_params({'q': f'loc:"{element}"'})
+
+    def site(self, element: str) -> None:
+        """Ajoute le mot clef site a l'attribut params
+
+        Args:
+            element (str): element de recherche
+        """
+
+        self.set_params({'q': f'site:"{element}"'})

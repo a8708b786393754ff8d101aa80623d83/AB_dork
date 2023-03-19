@@ -18,7 +18,7 @@ class ModelBase:
         self.operator_dork = ''
 
         self.const = const
-        self.set_operator()
+        self.init_operator()
 
     def get_link_search(self) -> str:
         """Recupere le lien de recherche de google
@@ -31,14 +31,14 @@ class ModelBase:
             self.const.PATH_DATA + self.const.FILENAME_LINKS)
         return data[self.search_engine]
 
-    def set_operator(self):
+    def init_operator(self):
         """Ajoute a l'attribut operator une liste des operateur dork."""
 
         self.operator_dork = ModelExtensionJson.get_content_file(
             self.const.PATH_DATA + self.const.FILENAME_DORK)['dork']
         
     def get_header(self): 
-        """_summary_"""
+        """Recupere le header a partir d'un fichier."""
         
         return ModelExtensionYaml.get_content_file(self.const.PATH_DATA + self.const.FILENAME_HEADERS)[self.navigator]
 

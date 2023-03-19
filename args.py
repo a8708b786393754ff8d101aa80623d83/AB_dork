@@ -1,6 +1,12 @@
-from argparse import ArgumentParser
+from argparse import ArgumentParser, Namespace
 
-def parser(): 
+def parser() -> Namespace: 
+    """Argument ligne de commande
+
+    Returns:
+        Namespace: type argparse
+    """
+    
     arg = ArgumentParser()
     arg.add_argument('-e', '--element', type=str, help='Enter the lement to search')
     

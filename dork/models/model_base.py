@@ -1,10 +1,9 @@
-import json
-import random
-
 import requests
 from bs4 import BeautifulSoup
-
 import dork.const as const
+
+from .extension.ModelExtensionJson import ModelExtensionJson
+from .extension.ModelExtensionYaml import ModelExtensionYaml
 
 
 class ModelBase:
@@ -28,25 +27,20 @@ class ModelBase:
             str: lien de recherche de google
         """
 
-        data = self.get_content_file(
+        data = ModelExtensionJson.get_content_file(
             self.const.PATH_DATA + self.const.FILENAME_LINKS)
         return data[self.search_engine]
-
-    def get_user_agent(self) -> str:
-        """Recupere un user agent 
-        Returns:
-            str: user agent
-        """
-
-        data = self.get_content_file(
-            self.const.PATH_DATA + self.const.FILENAME_USER_AGENT)
-        return random.choice(data[self.navigator])
 
     def set_operator(self):
         """Ajoute a l'attribut operator une liste des operateur dork."""
 
-        self.operator_dork = self.get_content_file(
+        self.operator_dork = ModelExtensionJson.get_content_file(
             self.const.PATH_DATA + self.const.FILENAME_DORK)['dork']
+        
+    def get_header(self): 
+        """_summary_"""
+        
+        return ModelExtensionYaml.get_content_file(self.const.PATH_DATA + self.const.FILENAME_HEADERS)[self.navigator]
 
     def get_soup(self, resp: requests.Response) -> BeautifulSoup:
         """Recupere le soup d'une page html
@@ -59,16 +53,3 @@ class ModelBase:
         """
 
         return BeautifulSoup(resp.content, 'lxml') if resp.ok else None
-
-    def get_content_file(self, filename: str) -> dict:
-        """Recupere le contenue d'un fichier 
-
-        Args:
-            filename (str): nom du fichier 
-
-        Returns:
-           dict: data
-        """
-
-        with open(filename) as f:
-            return json.load(f)

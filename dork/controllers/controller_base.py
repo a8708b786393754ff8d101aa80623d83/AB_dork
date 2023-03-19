@@ -29,16 +29,19 @@ class ControllerBase:
         self.item = ''
         self.user_agent = ''
         self.params = {}
-        self.headers = {'User-agent': '',
-                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                        'Accept-Language': 'en-US,en;q=0.5',
-                        'Accept-Encoding': 'gzip, deflate',
-                        'DNT': '1',
-                        'Connection': 'keep-alive',
-                        'Upgrade-Insecure-Requests': '1'}
+        self.headers = {}
 
         self.set_url()
-        self.set_user_agent()
+        self.set_header()
+        
+    def set_page_count(self, page: int) -> None:
+        """Ajoute a l'attribut counter_page le nombre de page 
+
+        Args:
+            page (int): numero de page a afficher 
+        """
+
+        self.counter_page = page
 
     def set_item(self, item: str) -> None:
         """Ajoute un item (element de la recher).
@@ -85,15 +88,15 @@ class ControllerBase:
                 else:
                     self.params[key] = f'{value} '
 
-    def set_user_agent(self) -> None:
-        """Ajoute un user agent."""
-
-        self.headers['User-agent'] = self.user_agent = self.model.get_user_agent()
-
     def set_url(self) -> None:
         """Ajoute l'url, on recuperer le lien du moteur de recherche."""
 
         self.url = self.model.get_link_search()
+        
+    def set_header(self) -> None: 
+        """_summary_"""
+        
+        self.headers = self.model.get_header()
 
     def get_resp(self, proxy: bool=False) -> requests.Response:
         """Effectue une requetes GET en donnent les parametre est les user agent.

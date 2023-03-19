@@ -1,9 +1,9 @@
-import json 
+import json
 
 
-class ModelExtensionJson: 
-    """_summary_"""
-    
+class ModelExtensionJson:
+    """Classe d'extension pour la manipulation de donnée JSON."""
+
     @classmethod
     def get_content_file(cls, filename: str) -> dict:
         """Recupere le contenue d'un fichier 

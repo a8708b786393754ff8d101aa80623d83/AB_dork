@@ -36,6 +36,3 @@ def get_proxy(method: str = 'https') -> dict:
                     str(base64.b64decode(bs64_byte), encoding='utf-8'))
 
     return data
-
-
-get_proxy()

@@ -39,6 +39,12 @@ def proxy(method: str = 'https') -> dict:
 
 
 def get_proxy() -> dict:
+    """Recupere un proxie 
+
+    Returns:
+        dict: dictionnaire de donnée avec les ip et port du proxy_
+    """
+    
     data = {'http': '', 'https': ""}
 
     ip_proxys_https = proxy()
@@ -47,6 +53,4 @@ def get_proxy() -> dict:
     data['http'] = random.choice(ip_proxys_http['proxy'])
     data['https'] = random.choice(ip_proxys_https['proxy'])
     
-    return data 
-    
-get_proxy()
+    return data

@@ -2,5 +2,10 @@ import yaml
 
 
 class ModelExtensionYaml: 
-    def __init__(self) -> None:
-        pass
+    
+    @classmethod
+    def get_content_file(cls, filename: str) -> dict: 
+        with open(filename) as f: 
+            return yaml.safe_load(f)
+        
+        

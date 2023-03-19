@@ -47,8 +47,6 @@ def get_proxy() -> dict:
     data['http'] = random.choice(ip_proxys_http['proxy'])
     data['https'] = random.choice(ip_proxys_https['proxy'])
     
-    print(data)
-    
     return data 
     
 get_proxy()

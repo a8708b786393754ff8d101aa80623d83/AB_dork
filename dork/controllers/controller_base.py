@@ -1,5 +1,5 @@
 import requests
-
+import dork.utils as utils 
 
 class ControllerBase:
     """Classe de base des controller
@@ -22,6 +22,7 @@ class ControllerBase:
 
         self.model = model
         self.view = view
+        self.__utils = utils
         self.counter_page = 0
         self.query = ''
         self.url = ''
@@ -94,11 +95,13 @@ class ControllerBase:
 
         self.url = self.model.get_link_search()
 
-    def get_resp(self) -> requests.Response:
+    def get_resp(self, proxy: bool=False) -> requests.Response:
         """Effectue une requetes GET en donnent les parametre est les user agent.
 
         Returns:
             requests.Response: reponse de la requete
         """
+        if proxy: 
+            proxy = self.__utils.get_proxy()
 
-        return requests.get(self.url, params=self.params, headers=self.headers, verify=True)
+        return requests.get(self.url, params=self.params, headers=self.headers, verify=True, proxies=proxy)

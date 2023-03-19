@@ -19,7 +19,7 @@ arg = parser()
 
 def run(controller: object) -> None:
     controller.view.banner()
-    controller.view.user_agent(controller.user_agent)
+    controller.view.user_agent(controller.headers['User-agent'])
 
     controller.set_page_count(arg.counter_page)
 

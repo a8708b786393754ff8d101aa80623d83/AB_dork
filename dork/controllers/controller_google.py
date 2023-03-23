@@ -40,7 +40,7 @@ class ControllerGoogle(ControllerBase):
 
         while cmpt <= self.counter_page:
             resp = self.get_resp()
-            
+
             if self.is_blocked(resp.url):
                 self.view.url_blocked()
                 break
@@ -49,12 +49,12 @@ class ControllerGoogle(ControllerBase):
 
             if resp.ok:
                 soup = self.model.get_soup(resp)
+                main_node = self.model.get_main_node(soup)
+
                 try:
-                    main_node = self.model.get_main_node(soup)
+                    sectors = self.model.get_sector_result(main_node)
                 except AttributeError:
                     self.view.none_result()
-
-                sectors = self.model.get_sector_result(main_node)
 
                 for sector in sectors:
                     title = self.model.get_title(sector)

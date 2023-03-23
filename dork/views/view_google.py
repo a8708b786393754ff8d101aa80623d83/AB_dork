@@ -51,3 +51,8 @@ class ViewGoogle(ViewBase, ViewDork):
         """
 
         print(self.fore.YELLOW + f'[+*-*+]Url: {url} ' + self.fore.RESET)
+
+    def url_blocked(self) -> None: 
+        """Affiche un message qui dit que google est bloqué a cause du captchat."""
+        
+        print(self.back.WHITE + self.fore.RED + 'Google blocked (captchat)!' + self.back.RESET + self.fore.RESET)

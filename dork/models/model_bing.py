@@ -30,7 +30,7 @@ class ModelBing(ModelBase, ModelDork):
             str: lien de la balise a.
         """
 
-        return div.h2.a['href']
+        return div.h2.a.get('href')
 
     def get_title(self, div: bs4.element.Tag) -> str:
         """Recupere le titre
@@ -42,7 +42,7 @@ class ModelBing(ModelBase, ModelDork):
             str: titre de la balise a.
         """
 
-        return div.h2.a.text
+        return div.h2.a
 
     def get_main_node(self, soup: bs4.BeautifulSoup) -> list[bs4.element.Tag]:
         """Recupere le noeud main

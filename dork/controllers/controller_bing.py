@@ -48,12 +48,12 @@ class ControllerBing(ControllerBase):
                     try:
                         title = self.model.get_title(li)
                         link = self.model.get_link(li)
-                        if link:
-                            self.view.link(link)
-                        elif title.text:
-                            self.view.title(title.text)
                     except AttributeError:
                         self.view.none_result()
+
+                    else:
+                        self.view.link(link)
+                        self.view.title(title)
 
             self.view.space_separator()
             cmpt += 1

@@ -39,3 +39,9 @@ class ViewBase:
         """Ajoute un espace, cette methode ajoute un seperateur entre les urls de requete."""
         
         print(self.fore.MAGENTA + '[*-*--------------------------------------------------*-*] \n' + self.fore.RESET)
+    
+    def none_result(self) -> None:
+        """Affiche une message quand ya pas de resultat."""
+
+        print(self.fore.MAGENTA + 'Aucun resultas de la recherche' + self.fore.RESET)
+        exit(0)

@@ -18,11 +18,18 @@ class ModelGoogle(ModelBase, ModelDork):
         super().__init__()
         self.navigator = 'chrome'
         self.search_engine = 'google'
-        
-    def get_sector_result(self, node: bs4.BeautifulSoup): 
-        
-        return node.find_all(class_='yuRUbf')
 
+    def get_sector_result(self, node: bs4.BeautifulSoup) -> bs4.ResultSet:
+        """Renvoie la div qui contient les informations de chaqsue resultat
+
+        Args:
+            node (bs4.BeautifulSoup): noeud html
+
+        Returns:
+            bs4.ResultSet: object bs4
+        """
+
+        return node.find_all(class_='yuRUbf')
 
     def get_link(self, div: bs4.element.Tag) -> str:
         """Recupere le lien
@@ -34,7 +41,7 @@ class ModelGoogle(ModelBase, ModelDork):
             str: lien de la balise a.
         """
 
-        return div.a.get('href') 
+        return div.a.get('href')
 
     def get_title(self, div: bs4.element.Tag) -> str:
         """Recupere le titre

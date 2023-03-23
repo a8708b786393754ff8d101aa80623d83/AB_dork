@@ -51,3 +51,9 @@ class ViewBing(ViewBase, ViewDork):
         """
 
         print(self.fore.YELLOW + f'[+*-*+]Url: {url} ' + self.fore.RESET)
+
+    def none_result(self) -> None:
+        """Affiche une message quand ya pas de resultat."""
+
+        print(self.fore.MAGENTA + 'Aucun resultas de la recherche' + self.fore.RESET)
+        exit(0)

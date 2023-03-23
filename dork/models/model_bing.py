@@ -41,8 +41,7 @@ class ModelBing(ModelBase, ModelDork):
         Returns:
             str: titre de la balise a.
         """
-
-        return div.h2.a
+        return div.h2.a.text
 
     def get_main_node(self, soup: bs4.BeautifulSoup) -> list[bs4.element.Tag]:
         """Recupere le noeud main

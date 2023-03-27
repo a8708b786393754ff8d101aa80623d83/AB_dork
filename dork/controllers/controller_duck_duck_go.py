@@ -1,3 +1,7 @@
+from requests_html import HTMLSession
+import requests
+from bs4 import BeautifulSoup
+import dork.utils as utils
 from .controller_base import ControllerBase
 
 
@@ -18,11 +22,41 @@ class ControllerDuckDuckGo(ControllerBase):
 
         super().__init__(model, view)
 
-    def search(self, page: int=0) -> None:
+    def get_soup(self, resp: requests.Response) -> BeautifulSoup:
+        """Recupere le soup d'une page html
+
+        Args:
+            resp (requests.Response): reponse de la requete
+
+        Returns:
+            BeautifulSoup: soup du contenue de la page
+        """
+
+        return BeautifulSoup(resp.html.html, 'lxml') if resp.ok else None
+
+    def get_resp(self, proxy: bool = False):
+        """_summary_
+
+        Args:
+            proxy (bool, optional): _description_. Defaults to False.
+
+        Returns:
+            requests.Response: _description_
+        """
+
+        s = HTMLSession()
+
+        if proxy:
+            proxy = utils.get_proxy()
+
+        return s.get(self.url, params=self.params, headers=self.headers, verify=True, proxies=proxy)
+
+    def search(self, page: int = 0) -> None:
         resp = self.get_resp()
+        resp.html.render()
+
         self.view.url(resp.url)
 
-        if resp.ok: 
+        if resp.ok:
             soup = self.model.get_soup(resp)
-            print(soup)
             node_main = self.model.get_main_node(soup)

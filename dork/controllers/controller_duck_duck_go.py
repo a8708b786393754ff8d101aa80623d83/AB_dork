@@ -1,4 +1,3 @@
-from requests_html import HTMLSession
 import requests
 from bs4 import BeautifulSoup
 import dork.utils as utils
@@ -44,19 +43,23 @@ class ControllerDuckDuckGo(ControllerBase):
             requests.Response: _description_
         """
 
-        s = HTMLSession()
-
         if proxy:
             proxy = utils.get_proxy()
 
-        return s.get(self.url, params=self.params, headers=self.headers, verify=True, proxies=proxy)
+        return requests.get(self.url, params=self.params, headers=self.headers, verify=True, proxies=proxy, allow_redirects=True)
 
     def search(self, page: int = 0) -> None:
         resp = self.get_resp()
-        resp.html.render()
 
         self.view.url(resp.url)
 
         if resp.ok:
             soup = self.model.get_soup(resp)
             node_main = self.model.get_main_node(soup)
+            sectors = self.model.get_sector_result(node_main)
+#
+            for sector in sectors:
+                title = self.model.get_title(sector)
+                link = self.model.get_link(sector)
+                self.view.title(title)
+                self.view.link(link)

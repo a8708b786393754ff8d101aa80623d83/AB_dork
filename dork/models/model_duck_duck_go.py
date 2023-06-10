@@ -42,7 +42,7 @@ class ModelDuckDuckGo(ModelBase, ModelDork):
             str: titre de la balise a.
         """
 
-        return div.h2.a.span.text
+        return div.h2.a.text
 
     def get_main_node(self, soup: bs4.BeautifulSoup) -> list[bs4.element.Tag]:
         """Recupere le noeud main
@@ -54,4 +54,16 @@ class ModelDuckDuckGo(ModelBase, ModelDork):
             list: données. 
         """
 
-        return soup.find_all('article')
+        return soup.find('div', id="links")
+    
+    def get_sector_result(self, node: bs4.BeautifulSoup) -> list[bs4.element.Tag]: 
+        """_summary_
+
+        Args:
+            node (bs4.BeautifulSoup): _description_
+
+        Returns:
+            list: _description_
+        """
+        
+        return node.find_all('div', class_="links_main links_deep result__body")

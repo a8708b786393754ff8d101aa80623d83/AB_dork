@@ -48,8 +48,12 @@ class ControllerBing(ControllerBase):
                     try:
                         title = self.model.get_title(li)
                         link = self.model.get_link(li)
+
+                    except TypeError:
+                        pass
+
                     except AttributeError:
-                        self.view.none_result()
+                        pass
 
                     else:
                         self.view.link(link)

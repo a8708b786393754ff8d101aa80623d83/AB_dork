@@ -20,28 +20,28 @@ class ModelBing(ModelBase, ModelDork):
         self.search_engine = 'bing'
 
 
-    def get_link(self, div: bs4.element.Tag) -> str:
+    def get_link(self, li: bs4.element.Tag) -> str:
         """Recupere le lien
 
         Args:
-            div (bs4.element.Tag): balise div HTML
+            li (bs4.element.Tag): balise li HTML
 
         Returns:
             str: lien de la balise a.
         """
 
-        return div.h2.a.get('href')
+        return li.h2.a['href']
 
-    def get_title(self, div: bs4.element.Tag) -> str:
+    def get_title(self, li: bs4.element.Tag) -> str:
         """Recupere le titre
 
         Args:
-            div (bs4.element.Tag): balise div HTML
+            li (bs4.element.Tag): balise li HTML
 
         Returns:
             str: titre de la balise a.
         """
-        return div.h2.a.text
+        return li.h2.text
 
     def get_main_node(self, soup: bs4.BeautifulSoup) -> list[bs4.element.Tag]:
         """Recupere le noeud main
@@ -53,4 +53,4 @@ class ModelBing(ModelBase, ModelDork):
             list: données. 
         """
 
-        return soup.select('main li')
+        return soup.select('main > ol > li')

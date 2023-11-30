@@ -1,15 +1,16 @@
 # AB_dork
 
-Python script that automates dork searches on different search engines: 
- - google 
- - bing 
- - duckduckgo
+Python script that automates silly searches on different search engines:
+- Google
+- Bing
+- DuckDuckGo
+- Yahoo (not implemented)
 
 The script runs on the command line.
 
 ## Arguments
 
-There are different arguments, first we have the search engine, then the dork operators: 
+There are different arguments, first we have the search engine, then the idiot operators:
 - filetype
 - intext
 - inalltext
@@ -17,11 +18,11 @@ There are different arguments, first we have the search engine, then the dork op
 - film
 - inanchor
 - blog-url
-- loc 
-- site 
+- loc
+- site
 - extension
 
-It is possible not to use the operators and perform a simple search with the argument ```-c ```. 
+It is possible not to use the operators and to perform a simple search with the ```-c ``` argument.
 
 
 ## Use
